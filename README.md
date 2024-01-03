@@ -24,7 +24,7 @@ To transpile and bundle your filmFlix app, configure Parcel to:
 
 ## Installing the Right Dependencies
 
-Make sure you're inside the `myFlix-client` project folder in your terminal. Run the following commands:
+Make sure you're inside the `filmFlix-client` project folder in your terminal. Run the following commands:
 
 ```bash
 npm install -g parcel
@@ -35,7 +35,7 @@ npm install --save react react-dom
 Although Parcel is installed globally for now, consider installing it locally for version control. This ensures consistency for everyone accessing the app.
 
 Creating Your First Files
-Inside "myFlix-client/src", create the following files:
+Inside "filmFlix-client/src", create the following files:
 
 1. index.jsx
 ```
@@ -68,7 +68,7 @@ $color: steelblue;
 <!DOCTYPE html>
 <html>
   <head>
-    <title>myFlix</title>
+    <title>filmFlix</title>
   </head>
   <body>
     <div id="root"></div>
