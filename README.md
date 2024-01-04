@@ -89,9 +89,9 @@ For some computers, Parcel v2 may return an error. Ensure you have Microsoft Vis
 After running the command, Parcel will build the project, creating new files in the dist directory. Do not modify these files. The browser loads the updated index.html with hashed filenames to avoid caching.
 
 View your project at http://localhost:1234. 
-<sub>
+
   (To start the server; type <span style="font-family: 'Monaco'; font-size: 10px; font-weight:light; color: red">parcel src/index.html</span> in terminal).
- </sub>
+
 
 
 
