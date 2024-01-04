@@ -90,7 +90,11 @@ After running the command, Parcel will build the project, creating new files in 
 
 View your project at http://localhost:1234. 
 
-  (To start the server; type <span style="font-family: 'Monaco'; font-size: 10px; font-weight:light; color: red">parcel src/index.html</span> in terminal).
+  (To start the server; type
+  ```
+   <span style="font-family: 'Monaco'; font-size: 10px; font-weight:light; color: red">parcel src/index.html</span> 
+   ```
+   in terminal).
 
 
 
