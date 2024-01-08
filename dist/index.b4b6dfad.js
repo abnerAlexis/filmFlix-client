@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"jAqLq":[function(require,module,exports) {
+})({"5JM7M":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -226,7 +226,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
     var hostname = getHostname();
     var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == "https:" && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? "wss" : "ws";
+    var protocol = HMR_SECURE || location.protocol == "https:" && ![
+        "localhost",
+        "127.0.0.1",
+        "0.0.0.0"
+    ].includes(hostname) ? "wss" : "ws";
     var ws;
     try {
         ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/");
@@ -27306,6 +27310,6 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"8203d8ea0f302e45":"3kL9p"}]},["jAqLq","Dqm5i","d8Dch"], "d8Dch", "parcelRequirec1fd")
+},{"8203d8ea0f302e45":"3kL9p"}]},["5JM7M","Dqm5i","d8Dch"], "d8Dch", "parcelRequirec1fd")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
