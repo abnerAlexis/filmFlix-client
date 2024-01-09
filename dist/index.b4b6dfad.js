@@ -27314,29 +27314,40 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MainView", ()=>MainView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
+var _movieCard = require("../movie-card/movie-card");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([
         {
             id: 1,
-            title: "The Lord of the Rings: The Return of the King"
+            title: "The Lord of the Rings: The Return of the King",
+            genre: "Adventure",
+            imageURL: "https://www.imdb.com/title/tt0167260/mediaviewer/rm584928512/?ref_=tt_ov_i"
         },
         {
             id: 2,
-            title: "Pulp Fiction"
+            title: "Pulp Fiction",
+            genre: "Crime",
+            imageURL: "https://www.imdb.com/title/tt0110912/mediaviewer/rm1959546112/?ref_=tt_ov_i"
         },
         {
             id: 3,
-            title: "Silence of the Lambs"
+            title: "Silence of the Lambs",
+            genre: "Crime",
+            imageURL: "https://www.imdb.com/title/tt0102926/mediaviewer/rm3242988544/?ref_=tt_ov_i"
         },
         {
             id: 4,
-            title: "The Good, the Bad and the Ugly"
+            title: "The Good, the Bad and the Ugly",
+            genre: "Western",
+            imageURL: "https://www.imdb.com/title/tt0060196/mediaviewer/rm1383786241/?ref_=tt_ov_i"
         },
         {
             id: 5,
-            title: "Schindler's List"
+            title: "Schindler's List",
+            genre: "Drama",
+            imageURL: "https://www.imdb.com/title/tt0108052/mediaviewer/rm1610023168/?ref_=tt_ov_i"
         }
     ]);
     //If there are no movies in the list, display a message.
@@ -27344,26 +27355,26 @@ const MainView = ()=>{
         children: "There are no movies to show."
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 15,
+        lineNumber: 41,
         columnNumber: 16
     }, undefined);
     else return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: movies.map((movie)=>{
-            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: movie.title
-            }, movie.id, false, {
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                movie: movie
+            }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 20,
+                lineNumber: 46,
                 columnNumber: 28
             }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 18,
+        lineNumber: 44,
         columnNumber: 13
     }, undefined);
 };
-_s(MainView, "dElKE4vU67s8OEgJ28u77WqnaEM=");
+_s(MainView, "cqPXJsGcozoyD/kCsxL/+y60uVw=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27373,7 +27384,36 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"50ajH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bjFSm"}],"50ajH":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","@parcel/transformer-js/src/esmodule-helpers.js":"50ajH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bjFSm"}],"bwuIu":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$67b2.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+const MovieCard = (props)=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: props.movie.title
+    }, void 0, false, {
+        fileName: "src/components/movie-card/movie-card.jsx",
+        lineNumber: 2,
+        columnNumber: 12
+    }, undefined);
+};
+_c = MovieCard;
+var _c;
+$RefreshReg$(_c, "MovieCard");
+
+  $parcel$ReactRefreshHelpers$67b2.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"50ajH","react/jsx-dev-runtime":"iTorj","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bjFSm"}],"50ajH":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
