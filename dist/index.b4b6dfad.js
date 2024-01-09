@@ -27369,7 +27369,10 @@ const MainView = ()=>{
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                movie: movie
+                movie: movie,
+                onMovieClick: (newSelectedMovie)=>{
+                    setSelectedMovie(newSelectedMovie);
+                }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 54,
@@ -27381,15 +27384,17 @@ const MainView = ()=>{
         columnNumber: 9
     }, undefined);
 }; /*
-    else {
-        return (
-            <div>
-                {movies.map(movie => {
-                    return <MovieCard movie={movie} />;
-                })}
-            </div>
-        );
-    } 
+    return (
+        <div>
+            <button onClick={() => {
+                alert("Nice!");
+            }}>Click me!
+            </button>
+            {movies.map(movie => (
+                <MovieCard key={movie.id} movie={movie} />
+            ))}
+        </div>
+    );
 */ 
 _s(MainView, "mPG21rFk9iApiLPpyB/MUPCjnzU=");
 _c = MainView;
@@ -27412,13 +27417,16 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-const MovieCard = (props)=>{
+const MovieCard = (movie, onMovieClick)=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: props.movie.title
+        onClick: ()=>{
+            onMovieClick(movie);
+        },
+        children: movie.title
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 2,
-        columnNumber: 12
+        lineNumber: 3,
+        columnNumber: 9
     }, undefined);
 };
 _c = MovieCard;
