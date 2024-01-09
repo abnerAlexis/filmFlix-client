@@ -2948,7 +2948,7 @@ $parcel$ReactRefreshHelpers$98a3.prelude(module);
 try {
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
-var _mainView = require("./main-view/main-view");
+var _mainView = require("./components/main-view/main-view");
 //Import statement to indicate that you need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
 //Main component (will eventually use all the others)
@@ -2977,7 +2977,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bjFSm","./main-view/main-view":"5G2PO"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bjFSm","./components/main-view/main-view":"4gflv"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -27302,11 +27302,11 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"8203d8ea0f302e45":"3kL9p"}],"5G2PO":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$4cd9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"8203d8ea0f302e45":"3kL9p"}],"4gflv":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$f7a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$4cd9.prelude(module);
+$parcel$ReactRefreshHelpers$f7a6.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -27329,42 +27329,51 @@ const MainView = ()=>{
         {
             id: 3,
             title: "Silence of the Lambs"
+        },
+        {
+            id: 4,
+            title: "The Good, the Bad and the Ugly"
+        },
+        {
+            id: 5,
+            title: "Schindler's List"
         }
     ]);
+    //If there are no movies in the list, display a message.
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "There are no movies to show."
     }, void 0, false, {
-        fileName: "src/main-view/main-view.jsx",
-        lineNumber: 12,
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 15,
         columnNumber: 16
     }, undefined);
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+    else return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: movies.map((movie)=>{
             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: movie.title
-            }, void 0, false, {
-                fileName: "src/main-view/main-view.jsx",
-                lineNumber: 18,
-                columnNumber: 24
+            }, movie.id, false, {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 20,
+                columnNumber: 28
             }, undefined);
         })
     }, void 0, false, {
-        fileName: "src/main-view/main-view.jsx",
-        lineNumber: 16,
-        columnNumber: 9
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 18,
+        columnNumber: 13
     }, undefined);
 };
-_s(MainView, "GbqwfnAMW2HJjNNaJh6SZrD0R40=");
+_s(MainView, "dElKE4vU67s8OEgJ28u77WqnaEM=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
 
-  $parcel$ReactRefreshHelpers$4cd9.postlude(module);
+  $parcel$ReactRefreshHelpers$f7a6.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"50ajH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bjFSm","react":"21dqq","react/jsx-dev-runtime":"iTorj"}],"50ajH":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"50ajH","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"bjFSm"}],"50ajH":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
