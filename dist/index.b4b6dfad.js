@@ -27324,36 +27324,37 @@ const MainView = ()=>{
             id: 1,
             title: "The Lord of the Rings: The Return of the King",
             genre: "Adventure",
-            imageURL: "https://www.imdb.com/title/tt0167260/mediaviewer/rm584928512/?ref_=tt_ov_i"
+            imageURL: "https://m.media-amazon.com/images/I/91LAfx+AZhL._AC_UY436_FMwebp_QL65_.jpg"
         },
         {
             id: 2,
             title: "Pulp Fiction",
             genre: "Crime",
-            imageURL: "https://www.imdb.com/title/tt0110912/mediaviewer/rm1959546112/?ref_=tt_ov_i"
+            imageURL: "https://m.media-amazon.com/images/I/91hqWdWIN+L._AC_UY436_FMwebp_QL65_.jpg"
         },
         {
             id: 3,
             title: "Silence of the Lambs",
             genre: "Crime",
-            imageURL: "https://www.imdb.com/title/tt0102926/mediaviewer/rm3242988544/?ref_=tt_ov_i"
+            imageURL: "https://m.media-amazon.com/images/I/71G5bef7vZL._AC_UY436_FMwebp_QL65_.jpg"
         },
         {
             id: 4,
             title: "The Good, the Bad and the Ugly",
             genre: "Western",
-            imageURL: "https://www.imdb.com/title/tt0060196/mediaviewer/rm1383786241/?ref_=tt_ov_i"
+            imageURL: "https://m.media-amazon.com/images/I/91BDDsP0clL._AC_UY436_FMwebp_QL65_.jpg"
         },
         {
             id: 5,
             title: "Schindler's List",
             genre: "Drama",
-            imageURL: "https://www.imdb.com/title/tt0108052/mediaviewer/rm1610023168/?ref_=tt_ov_i"
+            imageURL: "https://m.media-amazon.com/images/I/81pBGFSSSwL._AC_UY436_FMwebp_QL65_.jpg"
         }
     ]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-        movie: selectedMovie
+        movie: selectedMovie,
+        onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
         lineNumber: 43,
@@ -27364,7 +27365,7 @@ const MainView = ()=>{
         children: "There are no movies to show."
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 48,
+        lineNumber: 49,
         columnNumber: 16
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27375,28 +27376,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 54,
+                lineNumber: 55,
                 columnNumber: 17
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 52,
+        lineNumber: 53,
         columnNumber: 9
     }, undefined);
-}; /*
-    return (
-        <div>
-            <button onClick={() => {
-                alert("Nice!");
-            }}>Click me!
-            </button>
-            {movies.map(movie => (
-                <MovieCard key={movie.id} movie={movie} />
-            ))}
-        </div>
-    );
-*/ 
-_s(MainView, "mPG21rFk9iApiLPpyB/MUPCjnzU=");
+};
+_s(MainView, "HrCvZyyrotBIvY/lGBbVYUmGVHA=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27417,7 +27406,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-const MovieCard = (movie, onMovieClick)=>{
+const MovieCard = ({ movie, onMovieClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         onClick: ()=>{
             onMovieClick(movie);
@@ -27426,7 +27415,7 @@ const MovieCard = (movie, onMovieClick)=>{
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
         lineNumber: 3,
-        columnNumber: 9
+        columnNumber: 5
     }, undefined);
 };
 _c = MovieCard;
@@ -27479,12 +27468,12 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieView", ()=>MovieView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-const MovieView = ({ movie })=>{
+const MovieView = ({ movie, onBackClick })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                    src: movie.image
+                    src: movie.imageURL
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
                     lineNumber: 5,
@@ -27537,6 +27526,14 @@ const MovieView = ({ movie })=>{
             }, void 0, true, {
                 fileName: "src/components/movie-view/movie-view.jsx",
                 lineNumber: 11,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: onBackClick,
+                children: "Back"
+            }, void 0, false, {
+                fileName: "src/components/movie-view/movie-view.jsx",
+                lineNumber: 15,
                 columnNumber: 13
             }, undefined)
         ]

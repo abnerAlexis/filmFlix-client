@@ -9,38 +9,39 @@ export const MainView = () => {
             id: 1, 
             title: "The Lord of the Rings: The Return of the King",
             genre: "Adventure",
-            imageURL: "https://www.imdb.com/title/tt0167260/mediaviewer/rm584928512/?ref_=tt_ov_i",
+            imageURL: "https://m.media-amazon.com/images/I/91LAfx+AZhL._AC_UY436_FMwebp_QL65_.jpg",
         },
         {
             id: 2, 
             title: "Pulp Fiction",
             genre: "Crime",
-            imageURL: "https://www.imdb.com/title/tt0110912/mediaviewer/rm1959546112/?ref_=tt_ov_i",
+            imageURL: "https://m.media-amazon.com/images/I/91hqWdWIN+L._AC_UY436_FMwebp_QL65_.jpg"
         },
         {
             id: 3, 
             title: "Silence of the Lambs",
             genre: "Crime",
-            imageURL: "https://www.imdb.com/title/tt0102926/mediaviewer/rm3242988544/?ref_=tt_ov_i",
+            imageURL: "https://m.media-amazon.com/images/I/71G5bef7vZL._AC_UY436_FMwebp_QL65_.jpg"
         },
         {
             id: 4, 
             title: "The Good, the Bad and the Ugly",
             genre: "Western",
-            imageURL: "https://www.imdb.com/title/tt0060196/mediaviewer/rm1383786241/?ref_=tt_ov_i",
+            imageURL: "https://m.media-amazon.com/images/I/91BDDsP0clL._AC_UY436_FMwebp_QL65_.jpg",
         },
         {
             id: 5, 
             title: "Schindler's List",
             genre: "Drama",
-            imageURL: "https://www.imdb.com/title/tt0108052/mediaviewer/rm1610023168/?ref_=tt_ov_i",
+            imageURL: "https://m.media-amazon.com/images/I/81pBGFSSSwL._AC_UY436_FMwebp_QL65_.jpg",
     },
     ]);
 
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     if (selectedMovie) {
-        return <MovieView movie={selectedMovie} />;
+        return <MovieView movie={selectedMovie} 
+            onBackClick={() => setSelectedMovie(null)}/>;
     }
 
     //If there are no movies in the list, display a message.
@@ -62,17 +63,3 @@ export const MainView = () => {
         </div>
     );
 };
-
-/*
-    return (
-        <div>
-            <button onClick={() => {
-                alert("Nice!");
-            }}>Click me!
-            </button>
-            {movies.map(movie => (
-                <MovieCard key={movie.id} movie={movie} />
-            ))}
-        </div>
-    );
-*/
