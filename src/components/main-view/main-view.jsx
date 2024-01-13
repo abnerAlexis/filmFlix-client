@@ -9,20 +9,21 @@ export const MainView = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
-        fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/")
+        fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/movies/")
         .then(response => response.json())
         .then((data) => {
-            const moviesFromApi = data.docs.map((doc) => {
+            const moviesFromApi = data.map((movie) => {
+                // console.log('\nmovie: ' + JSON.stringify(movie))
               return {
-                Id: doc._id,
-                Title: doc.Title,
-                Year: doc.Year,
-                Image:doc.ImageURL,
-                Genre: doc.Genre,
-                Featured: doc.Featured,
-                Description: doc.Description,
-                Director: doc.Director[0],
-                Actors: doc.Actors
+                Id: movie._id,
+                Title: movie.Title,
+                Year: movie.Year,
+                Image:movie.ImageURL,
+                Genre: movie.Genre,
+                Featured: movie.Featured.toString(),
+                Description: movie.Description,
+                Director: movie.Director.Name,
+                Actors: movie.Actors.join(', ')
               };
             });
     
@@ -35,16 +36,18 @@ export const MainView = () => {
             onBackClick={() => setSelectedMovie(null)}/>;
     }
 
+    console.log('\nmovies.length: ' + movies.length)
+
     //If there are no movies in the list, display a message.
     if (movies.length === 0) {
         return <div>There are no movies to show.</div>
-    }   
+    }
 
     return (
         <div>
             {movies.map(movie => (
                 <MovieCard 
-                    key={movie.id}
+                    key={movie.Id}
                     movie={movie}
                     onMovieClick={newSelectedMovie => {
                         setSelectedMovie(newSelectedMovie);

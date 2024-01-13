@@ -95,3 +95,5 @@ parcel src/index.html</span> in terminal).
 
 ### Installing prop-types
 https://github.com/facebook/prop-types
+### parcel docs
+https://parceljs.org/features/development/
