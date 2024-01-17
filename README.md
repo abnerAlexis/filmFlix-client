@@ -97,3 +97,5 @@ parcel src/index.html</span> in terminal).
 https://github.com/facebook/prop-types
 ### parcel docs
 https://parceljs.org/features/development/
+### .env
+https://www.codementor.io/@parthibakumarmurugesan/what-is-env-how-to-set-up-and-run-a-env-file-in-node-1pnyxw9yxj

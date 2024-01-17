@@ -36,7 +36,7 @@ export const MainView = () => {
             onBackClick={() => setSelectedMovie(null)}/>;
     }
 
-    console.log('\nmovies.length: ' + movies.length)
+    // console.log('\nmovies.length: ' + movies.length)
 
     //If there are no movies in the list, display a message.
     if (movies.length === 0) {
