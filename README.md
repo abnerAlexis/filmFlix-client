@@ -92,3 +92,8 @@ View your project at http://localhost:1234.
 
 (To start the server; type <span style="font-family: 'Monaco'; font-size: 12px; font-weight:light; color: green">
 parcel src/index.html</span> in terminal).
+
+### Installing prop-types
+https://github.com/facebook/prop-types
+### parcel docs
+https://parceljs.org/features/development/
