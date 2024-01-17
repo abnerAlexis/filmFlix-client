@@ -28487,7 +28487,7 @@ const LoginView = ({ onLoggedIn })=>{
                     "Username:",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "text",
-                        value: username,
+                        Username: username,
                         onChange: (e)=>setUsername(e.target.value),
                         minLength: 5,
                         required: true
@@ -28507,7 +28507,7 @@ const LoginView = ({ onLoggedIn })=>{
                     "Password:",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "password",
-                        value: password,
+                        Password: password,
                         onChange: (e)=>setPassword(e.target.value),
                         required: true
                     }, void 0, false, {
