@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
-
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/movies/")
@@ -30,6 +31,10 @@ export const MainView = () => {
             setMovies(moviesFromApi);
           });
       }, []);
+
+    if (!user) {
+        return <LoginView />;
+    }
 
     if (selectedMovie) {
         return <MovieView movie={selectedMovie} 
