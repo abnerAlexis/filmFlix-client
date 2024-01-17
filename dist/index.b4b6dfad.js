@@ -28468,8 +28468,8 @@ const LoginView = ({ onLoggedIn })=>{
         //this prevents the default behavior of the form which is to reload entire page
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
         fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/login", {
             method: "POST",
@@ -28487,7 +28487,7 @@ const LoginView = ({ onLoggedIn })=>{
                     "Username:",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "text",
-                        Username: username,
+                        value: username,
                         onChange: (e)=>setUsername(e.target.value),
                         minLength: 5,
                         required: true
@@ -28507,7 +28507,7 @@ const LoginView = ({ onLoggedIn })=>{
                     "Password:",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "password",
-                        Password: password,
+                        value: password,
                         onChange: (e)=>setPassword(e.target.value),
                         required: true
                     }, void 0, false, {
