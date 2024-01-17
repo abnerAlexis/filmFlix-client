@@ -28475,7 +28475,7 @@ const LoginView = ({ onLoggedIn })=>{
             method: "POST",
             body: JSON.stringify(data)
         }).then((response)=>{
-            if (response.ok) onLoggedIn(username);
+            if (response.ok) onLoggedIn(Username);
             else alert("Login Failed.");
         });
     };
