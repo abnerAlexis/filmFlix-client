@@ -17,9 +17,8 @@ export const LoginView = ({onLoggedIn}) => {
             method: "POST",
             body: JSON.stringify(data)
         }).then(response => {
-            console.log(data)
             if (response.ok) {
-                onLoggedIn(Username);
+                onLoggedIn(username);
             } else {
                 alert("Login Failed.")
             }
