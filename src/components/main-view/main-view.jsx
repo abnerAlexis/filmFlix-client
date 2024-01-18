@@ -11,8 +11,8 @@ export const MainView = () => {
 
     useEffect(() => {
         fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/movies/")
-        .then(response => response.json())
-        .then((data) => {
+        .then((response) => response.json())
+        .then(data => {
             const moviesFromApi = data.map((movie) => {
                 // console.log('\nmovie: ' + JSON.stringify(movie))
               return {
@@ -33,7 +33,7 @@ export const MainView = () => {
       }, []);
 
     if (!user) {
-        return <LoginView onLoggedIn= {user => setUser(user)}/>;
+        return <LoginView />;
     }
 
     if (selectedMovie) {
