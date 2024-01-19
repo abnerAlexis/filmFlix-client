@@ -5,13 +5,13 @@ import { LoginView } from "../login-view/login-view";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
-    const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [user, setUser] = useState(storedUser ? storeUser: null);
     const [token, setToken] = useState(storedToken ? storedToken: null);
-
+    const [movies, setMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    
     useEffect(() => {
         if (!token) {
             return;
