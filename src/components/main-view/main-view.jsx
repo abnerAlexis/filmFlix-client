@@ -6,88 +6,94 @@ import { SignupView } from "../signup-view/signup-view";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    const storedToken = localStorage.getItem("token");
-    const [user, setUser] = useState(storedUser ? storedUser: null);
-    const [token, setToken] = useState(storedToken ? storedToken: null);
-    const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
-    
-    useEffect(() => {
-        if (!token) {
-            return;
-        }
-         
-        fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/movies/", {
-            headers: {Authorization: `Bearer ${token}`},
-        })
-        .then((response) => response.json())
-        .then(movies => {
-            setMovies(movies);
-            const moviesFromApi = movies.map((movie) => {
-                // console.log('\nmovie: ' + JSON.stringify(movie))
-              return {
-                Id: movie._id,
-                Title: movie.Title,
-                Year: movie.Year,
-                Image:movie.ImageURL,
-                Genre: movie.Genre,
-                Featured: movie.Featured.toString(),
-                Description: movie.Description,
-                Director: movie.Director.Name,
-                Actors: movie.Actors.join(', ')
-              };
-            });
-   
-            setMovies(moviesFromApi);
-          });
-      }, [token]);
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
+  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
-    if (!user) {
-        return (
-          <>
-            <LoginView
-                onLoggedIn={(user, token) => {
-                    setUser(user);
-                    setToken(token);
-                }}/>
-                or
-                <SignupView />
-          </>
-        );
+  useEffect(() => {
+    if (!token) {
+      return;
     }
 
-    if (selectedMovie) {
-        return <MovieView movie={selectedMovie} 
-            onBackClick={() => setSelectedMovie(null)}/>;
-    }
+    fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/movies/", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((movies) => {
+        setMovies(movies);
+        const moviesFromApi = movies.map((movie) => {
+          // console.log('\nmovie: ' + JSON.stringify(movie))
+          return {
+            Id: movie._id,
+            Title: movie.Title,
+            Year: movie.Year,
+            Image: movie.ImageURL,
+            Genre: movie.Genre,
+            Featured: movie.Featured.toString(),
+            Description: movie.Description,
+            Director: movie.Director.Name,
+            Actors: movie.Actors.join(", "),
+          };
+        });
 
-    // console.log('\nmovies.length: ' + movies.length)
+        setMovies(moviesFromApi);
+      });
+  }, [token]);
 
-    //If there are no movies in the list, display a message.
-    if (movies.length === 0) {
-        return <div>There are no movies to show.</div>
-    }
-
+  if (!user) {
     return (
-        <div>
-            {movies.map(movie => (
-                <MovieCard 
-                    key={movie.Id}
-                    movie={movie}
-                    onMovieClick={newSelectedMovie => {
-                        setSelectedMovie(newSelectedMovie);
-                    }}
-                />
-            ))}
-            <button 
-                onClick={() => { 
-                    setUser(null); 
-                    setToken(null); 
-                    localStorage.clear();
-            }}>
-                        Logout
-            </button>
-        </div>
+      <>
+        <LoginView
+          onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }}
+        />
+        or
+        <SignupView />
+      </>
     );
+  }
+
+  if (selectedMovie) {
+    return (
+      <MovieView
+        movie={selectedMovie}
+        onBackClick={() => setSelectedMovie(null)}
+      />
+    );
+  }
+
+  // console.log('\nmovies.length: ' + movies.length)
+
+  //If there are no movies in the list, display a message.
+  if (movies.length === 0) {
+    return <div>There are no movies to show.</div>;
+  }
+
+  return (
+    <div>
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie.Id}
+          movie={movie}
+          onMovieClick={(newSelectedMovie) => {
+            setSelectedMovie(newSelectedMovie);
+          }}
+        />
+      ))}
+      <button
+        onClick={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
+      >
+        Logout
+      </button>
+    </div>
+  );
 };
