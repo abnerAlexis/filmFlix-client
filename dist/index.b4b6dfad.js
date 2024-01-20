@@ -27184,7 +27184,7 @@ const MainView = ()=>{
     _s();
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
-    const [user, setUser] = (0, _react.useState)(storedUser ? storeUser : null);
+    const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null);
     const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
@@ -27273,7 +27273,7 @@ const MainView = ()=>{
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "ODuKZiKL5eqWIWzGA3JsA4WHQwo=");
+_s(MainView, "RWDxnWemC/JcBNJNH2oUrhtCSe8=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -28518,6 +28518,7 @@ const LoginView = ({ onLoggedIn })=>{
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+        onSubmit: handleSubmit,
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                 children: [
