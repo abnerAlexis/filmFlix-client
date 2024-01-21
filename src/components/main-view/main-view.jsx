@@ -40,6 +40,7 @@ export const MainView = () => {
         });
 
         setMovies(moviesFromApi);
+        // console.log("Movies: "+JSON.stringify(movies));
       });
   }, [token]);
 
