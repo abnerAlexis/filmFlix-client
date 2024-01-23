@@ -49,7 +49,7 @@ export const LoginView = ({ onLoggedIn }) => {
         />
       </label>
       <label>
-        Passport:
+        Password:
         <input
           id="password"
           type="password"
