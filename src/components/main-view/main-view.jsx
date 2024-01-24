@@ -45,6 +45,44 @@ export const MainView = () => {
       });
   }, [token]);
 
+  return (
+    <Row>
+      {!user ? (
+        <>
+          <LoginView
+            onLoggedIn={(user, token) => {
+              setUser(user);
+              setToken(token);
+            }}
+          />
+          or
+          <SignupView />
+        </>
+      ) : selectedMovie ? (
+        <MovieView
+          movie={selectedMovie}
+          onBackClick={() => setSelectedMovie(null)}
+        />
+      ) : movies.length === 0 ? (
+        <div>There are no movies to show.</div>
+      ) : (
+        <>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.Id}
+              movie={movie}
+              onMovieClick={(newSelectedMovie) => {
+                setSelectedMovie(newSelectedMovie);
+              }}
+            />
+          ))}
+        </>
+      )}
+    </Row>
+  );
+};
+/*
+
   if (!user) {
     return (
       <>
@@ -98,4 +136,5 @@ export const MainView = () => {
       </button>
     </div>
   );
-};
+
+*/
