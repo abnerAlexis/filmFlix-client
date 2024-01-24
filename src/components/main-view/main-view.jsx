@@ -47,7 +47,7 @@ export const MainView = () => {
   }, [token]);
 
   return (
-    <Row>
+    <Row className="justify-content-md-center">
       {!user ? (
         <>
           <LoginView
@@ -60,10 +60,14 @@ export const MainView = () => {
           <SignupView />
         </>
       ) : selectedMovie ? (
-        <MovieView
+
+        <Col md={8}>
+          <MovieView
           movie={selectedMovie}
           onBackClick={() => setSelectedMovie(null)}
         />
+        </Col>
+    
       ) : movies.length === 0 ? (
         <div>There are no movies to show.</div>
       ) : (
