@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 import { MainView } from "./components/main-view/main-view";
 import Container from "react-bootstrap";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";   ==>>See index.scss import allowing customization
 //Import statement to indicate that you need to bundle `./index.scss`
 import "./index.scss";
 import { Container } from "react-bootstrap";
@@ -10,7 +10,7 @@ import { Container } from "react-bootstrap";
 //Main component (will eventually use all the others)
 const App = () => {
   return (
-    <Container style={{border: "2px solid red"}} >
+    <Container>
       <MainView />
     </Container>
   );

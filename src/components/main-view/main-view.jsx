@@ -62,9 +62,8 @@ export const MainView = () => {
         </Col>
         
       ) : selectedMovie ? (
-        <Col md={8} style={{ border: "2px solic #00FF00" }}>
+        <Col md={8}>
           <MovieView
-            style={{ border: "2px solic #FF00FF" }}
             movie={selectedMovie}
             onBackClick={() => setSelectedMovie(null)}
           />
@@ -74,13 +73,15 @@ export const MainView = () => {
       ) : (
         <>
           {movies.map((movie) => (
-            <MovieCard
-              key={movie.Id}
-              movie={movie}
-              onMovieClick={(newSelectedMovie) => {
-                setSelectedMovie(newSelectedMovie);
-              }}
-            />
+            <Col className="mb-5" key={movie.Id} md={3}>
+              <MovieCard
+                key={movie.Id}
+                movie={movie}
+                onMovieClick={(newSelectedMovie) => {
+                  setSelectedMovie(newSelectedMovie);
+                }}
+              />
+            </Col>
           ))}
         </>
       )}
