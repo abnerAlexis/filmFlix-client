@@ -4,7 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { Row } from "react-bootstrap";
-import { Column } from "react-bootstrap"
+import { Col } from "react-bootstrap"
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
@@ -61,8 +61,9 @@ export const MainView = () => {
         </>
       ) : selectedMovie ? (
 
-        <Col md={8}>
+        <Col md={8} style={{border: "2px solic #00FF00"}}>
           <MovieView
+          style={{border: "2px solic #FF00FF"}}
           movie={selectedMovie}
           onBackClick={() => setSelectedMovie(null)}
         />
@@ -86,60 +87,3 @@ export const MainView = () => {
     </Row>
   );
 };
-/*
-
-  if (!user) {
-    return (
-      <>
-        <LoginView
-          onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }}
-        />
-        or
-        <SignupView />
-      </>
-    );
-  }
-
-  if (selectedMovie) {
-    return (
-      <MovieView
-        movie={selectedMovie}
-        onBackClick={() => setSelectedMovie(null)}
-      />
-    );
-  }
-
-  // console.log('\nmovies.length: ' + movies.length)
-
-  //If there are no movies in the list, display a message.
-  if (movies.length === 0) {
-    return <div>There are no movies to show.</div>;
-  }
-
-  return (
-    <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.Id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-      <button
-        onClick={() => {
-          setUser(null);
-          setToken(null);
-          localStorage.clear();
-        }}
-      >
-        Logout
-      </button>
-    </div>
-  );
-
-*/
