@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { Row } from "react-bootstrap";
+import { Column } from "react-bootstrap"
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
