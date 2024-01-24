@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -30,46 +32,52 @@ export const SignupView = () => {
       }
     });
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="signupUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
           type="text"
+          placeholder="John Doe"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          minLength="3"
+          minLength={3}
           required
         />
-      </label>
-      <label>
-        Password:
-        <input
+      </Form.Group>
+      <Form.Group controlId="signupPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password"
+          placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          minLength={5}
           required
-        />
-      </label>
-      <label>
-        Email:
-        <input
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group controlId="email">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
           type="email"
+          placeholder="jonhdoe@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <label>
-        Birthday:
-        <input
+          required
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group controlId="birthday">
+        <Form.Label>Birthday:</Form.Label>
+        <Form.Control
           type="date"
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
           required
-        />
-      </label>
-      <button type="submit">Signup</button>
-    </form>
+        ></Form.Control>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 };

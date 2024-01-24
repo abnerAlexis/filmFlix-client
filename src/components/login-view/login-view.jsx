@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
   const URL = "https://film-flix-3b34b5f2dccd.herokuapp.com";
@@ -36,30 +38,31 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
-          id="username"
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control
           type="text"
+          placeholder="John Doe"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           minLength={3}
           required
         />
-      </label>
-      <label>
-        Password:
-        <input
-          id="password"
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password"
+          placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          suggested="current-password"
           required
         />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
   );
 };
