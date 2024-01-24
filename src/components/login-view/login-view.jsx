@@ -41,14 +41,14 @@ export const LoginView = ({ onLoggedIn }) => {
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
-        <Form.Control 
+        <Form.Control
           type="text"
           placeholder="John Doe"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           minLength={3}
           required
-      />
+        />
       </Form.Group>
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
@@ -64,5 +64,5 @@ export const LoginView = ({ onLoggedIn }) => {
         Submit
       </Button>
     </Form>
-  );  
+  );
 };

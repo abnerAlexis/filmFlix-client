@@ -49,7 +49,6 @@ export const MainView = () => {
   return (
     <Row className="justify-content-md-center">
       {!user ? (
-        
         <Col md={5}>
           <LoginView
             onLoggedIn={(user, token) => {
@@ -60,7 +59,6 @@ export const MainView = () => {
           or
           <SignupView />
         </Col>
-        
       ) : selectedMovie ? (
         <Col md={8}>
           <MovieView
