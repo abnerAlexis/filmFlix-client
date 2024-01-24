@@ -4,7 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap"
+import { Col } from "react-bootstrap";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
@@ -49,7 +49,8 @@ export const MainView = () => {
   return (
     <Row className="justify-content-md-center">
       {!user ? (
-        <>
+        
+        <Col md={5}>
           <LoginView
             onLoggedIn={(user, token) => {
               setUser(user);
@@ -58,17 +59,16 @@ export const MainView = () => {
           />
           or
           <SignupView />
-        </>
-      ) : selectedMovie ? (
-
-        <Col md={8} style={{border: "2px solic #00FF00"}}>
-          <MovieView
-          style={{border: "2px solic #FF00FF"}}
-          movie={selectedMovie}
-          onBackClick={() => setSelectedMovie(null)}
-        />
         </Col>
-    
+        
+      ) : selectedMovie ? (
+        <Col md={8} style={{ border: "2px solic #00FF00" }}>
+          <MovieView
+            style={{ border: "2px solic #FF00FF" }}
+            movie={selectedMovie}
+            onBackClick={() => setSelectedMovie(null)}
+          />
+        </Col>
       ) : movies.length === 0 ? (
         <div>There are no movies to show.</div>
       ) : (
