@@ -3,8 +3,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Row } from "react-bootstrap";
+import { Nav, Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
@@ -25,7 +26,7 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((movies) => {
-        setMovies(movies);
+        // setMovies(movies);
         const moviesFromApi = movies.map((movie) => {
           // console.log('\nmovie: ' + JSON.stringify(movie))
           return {
@@ -47,6 +48,87 @@ export const MainView = () => {
   }, [token]);
 
   return (
+    <BrowserRouter>
+      <Row className="justify-content-md-center">
+        <Routes>
+          <Route
+            path="/signup"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <SignupView />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route 
+            path="/movies/:movieId"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>There are no movies to show.</Col>
+                ) : (
+                  <Col md={8}>
+                    <MovieView movies={movies} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route 
+            path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>There are no movies to show at this time.</Col>
+                ) : (
+                  <>
+                    {movies.map((movie) => (
+                      <Col className="mb-4" key={movie.Id} md={3}>
+                        <MovieCard movie={movie} />
+                      </Col>
+                    ))}
+                  </>
+                )}
+              </>
+            }
+          />
+        </Routes>
+      </Row>
+    </BrowserRouter>
+  );
+};
+
+/*
+
+return (
     <Row className="justify-content-md-center">
       {!user ? (
         <Col md={5}>
@@ -85,4 +167,5 @@ export const MainView = () => {
       )}
     </Row>
   );
-};
+
+*/

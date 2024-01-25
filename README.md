@@ -99,3 +99,7 @@ https://github.com/facebook/prop-types
 https://parceljs.org/features/development/
 ### .env
 https://www.codementor.io/@parthibakumarmurugesan/what-is-env-how-to-set-up-and-run-a-env-file-in-node-1pnyxw9yxj
+
+# Update All the Node Dependencies to their latest versions - Read on the following url
+https://flaviocopes.com/update-npm-dependencies/
+```npm install --save react@latest```
