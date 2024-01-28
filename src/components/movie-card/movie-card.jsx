@@ -1,6 +1,8 @@
+import React from "react";
 //importing proto-types
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 //MovieCard function component
 export const MovieCard = ({ movie, onMovieClick }) => {
