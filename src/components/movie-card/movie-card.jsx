@@ -11,7 +11,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Genre}</Card.Text>
         <Button
-          // onClick={() => onMovieClick(movie)} - added to Card
+          onClick={() => onMovieClick(movie)} //- added to Card
           variant="link"
         >
           Open
