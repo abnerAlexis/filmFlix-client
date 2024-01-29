@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const NavigationBar = ({user, onLoggedOut}) => {
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" expand="lg" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     Film Flix
@@ -11,7 +11,8 @@ export const NavigationBar = ({user, onLoggedOut}) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <>
+                        {!user && (
+                            <>
                             <Nav.Link as={Link} to="/login">
                                 Login
                             </Nav.Link>
@@ -19,6 +20,7 @@ export const NavigationBar = ({user, onLoggedOut}) => {
                                 Signup
                             </Nav.Link>
                         </>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
