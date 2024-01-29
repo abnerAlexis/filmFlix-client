@@ -39,7 +39,7 @@ export const SignupView = () => {
         <Form.Label>Username:</Form.Label>
         <Form.Control
           type="text"
-          placeholder="John Doe"
+          placeholder="JohnDoe"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           minLength={3}
