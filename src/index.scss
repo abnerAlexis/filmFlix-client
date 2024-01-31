@@ -1,10 +1,8 @@
 $primary: LightSteelBlue;
-$body-bg: LavenderBlush;
+$body-bg: rgb(250, 245, 247);
 
 @import "~bootstrap/scss/bootstrap.scss";
 
-$color: steelblue;
-
-.film-flix {
-  color: $color;
+body {
+  background-color: black;
 }
