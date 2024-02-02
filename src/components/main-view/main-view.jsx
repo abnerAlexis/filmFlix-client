@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar"
+import { ProfileView } from "../profile-view/profile-view";
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -14,13 +15,26 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  // const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const handleUserUpdate = (updatedUser) => {
+    setUser(updatedUser);
+    console.log(JSON.stringify(updatedUser));
+  }
+
+  const handleDeregister = () => {
+    onDeregister();
+  }
 
   useEffect(() => {
     if (!token) {
       return;
     }
-
+    
+    /* 
+    console.log("User: " + JSON.stringify(user));
+            √ prints logged in user info
+    */
     fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/movies/", {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -28,7 +42,10 @@ export const MainView = () => {
       .then((movies) => {
         // setMovies(movies);
         const moviesFromApi = movies.map((movie) => {
-          // console.log('\nmovie: ' + JSON.stringify(movie))
+          /*
+            console.log("\nmovie: " + JSON.stringify(movie))
+                            √ prints movies
+          */
           return {
             Id: movie._id,
             Title: movie.Title,
@@ -38,10 +55,9 @@ export const MainView = () => {
             Featured: movie.Featured.toString(),
             Description: movie.Description,
             Director: movie.Director.Name,
-            Actors: movie.Actors.join(", "),
+            Actors: movie.Actors.join(", "), 
           };
         });
-
         setMovies(moviesFromApi);
         // console.log("Movies: "+JSON.stringify(movies));
       });
@@ -127,6 +143,20 @@ export const MainView = () => {
                 )}
               </>
             }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProfileView 
+              user={user} 
+              token={token}
+              movies={movies}
+              setUser={setUser}
+              onUserUpdate={handleUserUpdate} 
+              onDeregister={handleDeregister} 
+              />
+            }
+            
           />
         </Routes>
       </Row>

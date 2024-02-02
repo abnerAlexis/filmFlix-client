@@ -1,5 +1,4 @@
 import React from "react";
-//importing proto-types
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -20,7 +19,7 @@ export const MovieCard = ({ movie }) => {
   );
 };
 
-//Prop constrains' definitions for the MovieCard
+//Prop constrains definitions for the MovieCard
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,

@@ -4,8 +4,10 @@ import "./movie-view.scss";
 
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
+  
   const movie = movies.find((m) => m._id === movieId);
-  //console.log(JSON.stringify(movies)); Gets all movies
+  console.log("movie: " + movie);
+  //console.log(JSON.stringify(movies)); //Gets all movies
 
   return (
     <div>
