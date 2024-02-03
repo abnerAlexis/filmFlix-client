@@ -6,8 +6,8 @@ export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
   
   const movie = movies.find((m) => m.Id === movieId);
-  console.log("movieId: " + movieId);
-  console.log("movie: " + movie);
+  // console.log("movieId: " + movieId);
+  // console.log("movie: " + JSON.stringify(movie));
   //console.log(JSON.stringify(movies)); //Gets all movies
 
   return (

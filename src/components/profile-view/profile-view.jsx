@@ -28,7 +28,7 @@ export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(URL + `/${user.Username}`);
+      const response = await fetch(URL + `/users/update/${user.Username}`);
       const userData = await response.json();
 
       const updatedUser = {
@@ -42,7 +42,7 @@ export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
       }
 
       const updateResponse = await fetch(
-        URL + `users/${userData.newUsername}`,
+        URL + `/users/${userData.newUsername}`,
         {
           method: "PUT",
           headers: {
