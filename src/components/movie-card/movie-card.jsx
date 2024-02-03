@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 
 //MovieCard function component
 export const MovieCard = ({ movie }) => {
+  // console.log('MovieCard - movie: ' + JSON.stringify(movie))
   return (
     <Card>
       <Card.Img variant="top" src={movie.Image} /> 
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Genre}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie._id)}`} >
+        <Link to={`/movies/${encodeURIComponent(movie.Id)}`} >
           <Button variant="link">Open</Button>
         </Link>
       </Card.Body>

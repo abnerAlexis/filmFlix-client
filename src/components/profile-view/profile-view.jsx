@@ -17,9 +17,10 @@ export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
   const [newBirthday, setNewBirthday] = useState(user.Birthday);
   const URL = "https://film-flix-3b34b5f2dccd.herokuapp.com";
 
+  //AI suggestion over an error: The specified value "1999-06-27T00:00:00.000Z" does not conform to the required format, "yyyy-MM-dd"
   const formatDateStringToApiFormat = (originalDateString) => {
     const originalDate = new Date(originalDateString);
-    const formattedDateString = originalDate.toISOString().split('T')[0];
+    const formattedDateString = originalDate.toISOString().split("T")[0];
     return formattedDateString;
   };
 
@@ -67,7 +68,8 @@ export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
         <Col>
           <CardGroup>
             <Card>
-              <Card.Title>Profile View</Card.Title>
+              <Card.Body>
+                <Card.Title>Profile View</Card.Title>
                 <Form onSubmit={handleUserUpdate}>
                   <Form.Group controlId="profileUsername">
                     <Form.Label>Username:</Form.Label>
@@ -118,10 +120,11 @@ export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
                   <Link to="/profile/favorites">
                     <Button variant="primary">Your Favorite Movies</Button>
                   </Link>
+                  <Button variant="danger" onClick={onDeregister}>
+                    Delete Account
+                  </Button>
                 </Form>
-                <Button variant="danger" onClick={ onDeregister }>
-                  Delete Account
-                </Button>
+              </Card.Body>
             </Card>
           </CardGroup>
         </Col>
