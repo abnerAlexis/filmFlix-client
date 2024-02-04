@@ -1,3 +1,4 @@
+import { on } from "process";
 import React, { useState } from "react";
 import {
   Form,
@@ -10,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
+export const ProfileView = ({ user, onUserUpdate, onDeleteAccount }) => {
   const [newUsername, setNewUsername] = useState(user.Username);
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState(user.Email);
@@ -61,6 +62,27 @@ export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
       console.error("Update failed:", error.message);
     }
   };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const authToken = localStorage.getItem('token');
+      const deleteResponse = await fetch(URL + `/users/${user.Username}`,{
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": 'Bearer ${authToken}'
+        },
+      });
+      //console.log(authToken);
+      if (deleteResponse.ok) {
+        onDeleteAccount();
+      } else {
+        console.error("Deletion failed: ", deleteResponse.statusText);
+      }
+    } catch (error) {
+      console.error("Deletion failed: ", error.message);
+    }
+  }
 
   return (
     <Container>
@@ -120,7 +142,7 @@ export const ProfileView = ({ user, onUserUpdate, onDeregister }) => {
                   <Link to="/profile/favorites">
                     <Button variant="primary">Your Favorite Movies</Button>
                   </Link>
-                  <Button variant="danger" onClick={onDeregister}>
+                  <Button variant="danger" onClick={handleDeleteAccount}>
                     Delete Account
                   </Button>
                 </Form>
