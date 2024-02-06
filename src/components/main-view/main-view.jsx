@@ -5,6 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar"
 import { ProfileView } from "../profile-view/profile-view";
+import ProfileFavoriteMoviesView from "../profile-favorite-movies-view/profile-favorite-movies-view";
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -22,8 +23,8 @@ export const MainView = () => {
     console.log(JSON.stringify(updatedUser));
   }
 
-  const handleDeregister = () => {
-    onDeregister();
+  const handleDeleteAccount = () => {
+    onDeleteAccount();
   }
 
   useEffect(() => {
@@ -40,7 +41,6 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((movies) => {
-        // setMovies(movies);
         const moviesFromApi = movies.map((movie) => {
           /*
             console.log("\nmovie: " + JSON.stringify(movie))
@@ -71,6 +71,7 @@ export const MainView = () => {
           setUser(null);
           setToken(null);
           localStorage.clear();
+          window.open('/', '_self');
         }}
       />
       <Row className="justify-content-md-center">
@@ -148,15 +149,25 @@ export const MainView = () => {
             path="/profile"
             element={
               <ProfileView 
-              user={user} 
-              token={token}
-              movies={movies}
-              setUser={setUser}
-              onUserUpdate={handleUserUpdate} 
-              onDeregister={handleDeregister} 
+                user={user} 
+                token={token}
+                movies={movies}
+                setUser={setUser}
+                onUserUpdate={handleUserUpdate} 
+                onDeleteAccount={handleDeleteAccount} 
               />
             }
             
+          />
+          <Route 
+          path="/profile/favorites" 
+          element={
+            <ProfileFavoriteMoviesView
+              user={user} 
+              token={token}
+              movies={movies}
+            />
+          }
           />
         </Routes>
       </Row>
