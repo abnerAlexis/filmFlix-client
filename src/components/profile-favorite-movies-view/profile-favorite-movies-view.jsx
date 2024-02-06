@@ -59,7 +59,7 @@ export default function ProfileFavoriteMoviesView({ user, token }) {
                   <MovieCard movie={movie} />
                   <Card.Body>
                     <Card.Title>{movie.Title}</Card.Title>
-                    <Card.Text>{movie.Description}</Card.Text>
+                    <Card.Text>{movie.description}</Card.Text>
                     <Button
                       variant="danger"
                       onClick={() => handleRemoveFavorite(movie._id)}>

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const MovieCard = ({ movie }) => {
   // console.log('MovieCard - movie: ' + JSON.stringify(movie))
   // console.log(movie.Image);
-  // console.log(movie.Title);
+  // console.log(movie.Title);                                              √
   // console.log(movie.Genre);
   // console.log("movieId: " + movie._id);
   return (
@@ -16,7 +16,7 @@ export const MovieCard = ({ movie }) => {
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Genre}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie._id)}`} >
+        <Link to={`/movies/${encodeURIComponent(movie.Id)}`} >
           <Button variant="link">Open</Button>
         </Link>
       </Card.Body>

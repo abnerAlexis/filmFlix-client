@@ -5,8 +5,8 @@ import "./movie-view.scss";
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
   
-  const movie = movies.find((m) => decodeURIComponent(encodeURIComponent(m._id)) === movieId);
-
+  const movie = movies.find((m) => m.Id === decodeURIComponent(movieId));
+  // const movie = movies.find((m) => m._id === decodeURIComponent(movieId));
   // console.log("movieId: " + movieId);
   // console.log("movie: " + JSON.stringify(movie));
   //console.log(JSON.stringify(movies)); //Gets all movies

@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const ProfileView = ({ user, onUserUpdate, onDeleteAccount }) => {
+export const ProfileView = ({ user, onUserUpdate, onAddFavorite, onDeleteAccount }) => {
   const [newUsername, setNewUsername] = useState(user.Username);
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState(user.Email);
@@ -61,6 +61,8 @@ export const ProfileView = ({ user, onUserUpdate, onDeleteAccount }) => {
       console.error("Update failed:", error.message);
     }
   };
+
+
 
   const handleDeleteAccount = async () => {
     try {
