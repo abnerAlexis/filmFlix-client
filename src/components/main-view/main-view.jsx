@@ -5,7 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar"
 import { ProfileView } from "../profile-view/profile-view";
-import ProfileFavoriteMoviesView from "../profile-favorite-movies-view/profile-favorite-movies-view";
+import { ProfileFavoriteMoviesView } from "../profile-favorite-movies-view/profile-favorite-movies-view";
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -21,6 +21,30 @@ export const MainView = () => {
   const handleUserUpdate = (updatedUser) => {
     setUser(updatedUser);
     console.log(JSON.stringify(updatedUser));
+  }
+
+  const toggleFavorite = movieId => {
+   
+    if (!user) {
+      return;
+    }
+
+  // Checking of the movie is already in favorites
+  const isFavorite = user.FavoriteMovies.includes(movieId);
+  
+  //Updating user's favorites list.
+  const updatedUser = {
+    ...user,
+    FavoriteMovies: isFavorite
+      ? user.FavoriteMovies.filter((id) => id !== movieId)
+      : [...user.FavoriteMovies, movieId],
+  };
+
+  //Update user state
+  setUser(updatedUser);
+
+  //Save updated user data to localStorage
+  localStorage.setItem("user", JSON.stringify(updatedUser));
   }
 
   const handleDeleteAccount = () => {
@@ -64,7 +88,7 @@ export const MainView = () => {
   }, [token]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter> 
       <NavigationBar
         user={user}
         onLoggedOut={() => {
@@ -121,6 +145,8 @@ export const MainView = () => {
                   <Col md={8}>
                     <MovieView 
                       movies={movies} 
+                      user={user}
+                      onToggleFavorite={toggleFavorite}
                     />
                   </Col>
                 )}
@@ -139,7 +165,11 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie.Id} md={3}>
-                        <MovieCard movie={movie} />
+                        <MovieCard 
+                          movie={movie} 
+                          user={user}
+                          onToggleFavorite={toggleFavorite}  
+                        />
                       </Col>
                     ))}
                   </>

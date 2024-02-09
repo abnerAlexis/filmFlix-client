@@ -1,9 +1,9 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, isAuthenticated }) => {
   return (
-    <Navbar bg="dark" expand="lg" data-bs-theme="dark">
+    <Navbar sticky="top" bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
         <Navbar.Brand as={Link} to="/">
           Film Flix
@@ -30,6 +30,11 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                {isAuthenticated ? (
+                  <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                ) : (
+                  <Nav.Link href="/login">Login</Nav.Link>
+                )}
               </>
             )}
           </Nav>

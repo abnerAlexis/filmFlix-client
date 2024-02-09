@@ -1,8 +1,9 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
+import { Button } from "react-bootstrap";
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ user, movies, onToggleFavorite }) => {
   const { movieId } = useParams();
   
   const movie = movies.find((m) => m.Id === decodeURIComponent(movieId));
@@ -44,6 +45,19 @@ export const MovieView = ({ movies }) => {
         <span>Featured: </span>
         <span>{movie.Featured}: </span>
       </div>
+      <Button 
+        variant={user.FavoriteMovies.includes(movie.Id) 
+          ? "danger" 
+          : "primary"
+        }
+        onClick={() => onToggleFavorite(movie.Id)}
+      >
+        {
+          user && user.FavoriteMovies.includes(movie.Id)
+            ? "Remove from Favorites"
+            : "Add to Favorites"
+        }
+      </Button>
       <Link to={`/`}>
         <button className="back-button">Back</button>
       </Link>

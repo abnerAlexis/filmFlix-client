@@ -10,12 +10,11 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const ProfileView = ({ user, onUserUpdate, onAddFavorite, onDeleteAccount }) => {
+export const ProfileView = ({ user, onUserUpdate, onDeleteAccount }) => {
   const [newUsername, setNewUsername] = useState(user.Username);
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState(user.Email);
   const [newBirthday, setNewBirthday] = useState(user.Birthday);
-  const URL = "https://film-flix-3b34b5f2dccd.herokuapp.com";
 
   //AI suggestion over an error: The specified value "1999-06-27T00:00:00.000Z" does not conform to the required format, "yyyy-MM-dd"
   const formatDateStringToApiFormat = (originalDateString) => {
@@ -28,7 +27,7 @@ export const ProfileView = ({ user, onUserUpdate, onAddFavorite, onDeleteAccount
     e.preventDefault();
 
     try {
-      const response = await fetch(URL + `/users/update/${user.Username}`);
+      const response = await fetch(`https://film-flix-3b34b5f2dccd.herokuapp.com/users/update/${user.Username}`);
       const userData = await response.json();
 
       const updatedUser = {
@@ -67,14 +66,14 @@ export const ProfileView = ({ user, onUserUpdate, onAddFavorite, onDeleteAccount
   const handleDeleteAccount = async () => {
     try {
       const authToken = localStorage.getItem('token');
-      const deleteResponse = await fetch(URL + `/users/${user.Username}`,{
+      const deleteResponse = await fetch(`https://film-flix-3b34b5f2dccd.herokuapp.com/users/${user.Username}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Bearer ${authToken}'
+          "Authorization": `Bearer ${authToken}`
         },
       });
-      //console.log(authToken);
+      console.log(authToken);
       if (deleteResponse.ok) {
         onDeleteAccount();
       } else {
@@ -87,6 +86,10 @@ export const ProfileView = ({ user, onUserUpdate, onAddFavorite, onDeleteAccount
 
   return (
     <Container>
+      <div className="text-muted">
+        <h5>{user.Username}</h5>
+        <h6>{user.Email}</h6>
+      </div>
       <Row>
         <Col>
           <CardGroup>
