@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Button,
@@ -9,80 +9,36 @@ import {
   Col,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {
+  updateUser,
+  deleteAccount,
+  formatDateStringToApiFormat,
+} from "../../commons/utils";
 
-export const ProfileView = ({ user, onUserUpdate, onDeleteAccount }) => {
+export const ProfileView = ({ user, token, onUserUpdate, onDeleteAccount }) => {
   const [newUsername, setNewUsername] = useState(user.Username);
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState(user.Email);
   const [newBirthday, setNewBirthday] = useState(user.Birthday);
 
-  //AI suggestion over an error: The specified value "1999-06-27T00:00:00.000Z" does not conform to the required format, "yyyy-MM-dd"
-  const formatDateStringToApiFormat = (originalDateString) => {
-    const originalDate = new Date(originalDateString);
-    const formattedDateString = originalDate.toISOString().split("T")[0];
-    return formattedDateString;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const newUser = {
+      Username: newUsername,
+      Password: newPassword,
+      Email: newEmail,
+      Birthday: formatDateStringToApiFormat(newBirthday),
+    };
+    await updateUser(user.Username, newUser, token);
+    onUserUpdate(newUser);
   };
 
-  const handleUserUpdate = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(`https://film-flix-3b34b5f2dccd.herokuapp.com/users/update/${user.Username}`);
-      const userData = await response.json();
-
-      const updatedUser = {
-        Username: newUsername,
-        Email: newEmail,
-        Birthday: formatDateStringToApiFormat(newBirthday),
-      };
-
-      if (newPassword) {
-        updatedUser.Password = newPassword;
-      }
-
-      const updateResponse = await fetch(
-        URL + `/users/${userData.newUsername}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUser),
-        }
-      );
-
-      if (updateResponse.ok) {
-        onUserUpdate(updatedUser);
-      } else {
-        console.error("Update failed:", updateResponse.statusText);
-      }
-    } catch (error) {
-      console.error("Update failed:", error.message);
-    }
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    await deleteAccount(user.Username, token);
+    onDeleteAccount();
   };
-
-
-
-  const handleDeleteAccount = async () => {
-    try {
-      const authToken = localStorage.getItem('token');
-      const deleteResponse = await fetch(`https://film-flix-3b34b5f2dccd.herokuapp.com/users/${user.Username}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${authToken}`
-        },
-      });
-      console.log(authToken);
-      if (deleteResponse.ok) {
-        onDeleteAccount();
-      } else {
-        console.error("Deletion failed: ", deleteResponse.statusText);
-      }
-    } catch (error) {
-      console.error("Deletion failed: ", error.message);
-    }
-  }
 
   return (
     <Container>
@@ -96,7 +52,8 @@ export const ProfileView = ({ user, onUserUpdate, onDeleteAccount }) => {
             <Card>
               <Card.Body>
                 <Card.Title>Profile View</Card.Title>
-                <Form onSubmit={handleUserUpdate}>
+                {/* <Form onSubmit={onUserUpdate}> */}
+                <Form>
                   <Form.Group controlId="profileUsername">
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
@@ -139,14 +96,14 @@ export const ProfileView = ({ user, onUserUpdate, onDeleteAccount }) => {
                   <Button
                     variant="primary"
                     type="submit"
-                    onClick={handleUserUpdate}
+                    onClick={handleSubmit}
                   >
                     Update
                   </Button>
                   <Link to="/profile/favorites">
                     <Button variant="primary">Your Favorite Movies</Button>
                   </Link>
-                  <Button variant="danger" onClick={handleDeleteAccount}>
+                  <Button variant="danger" onClick={handleDelete}>
                     Delete Account
                   </Button>
                 </Form>

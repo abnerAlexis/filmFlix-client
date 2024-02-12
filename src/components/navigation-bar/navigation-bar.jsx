@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut, isAuthenticated }) => {
+export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
     <Navbar sticky="top" bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
@@ -30,11 +30,6 @@ export const NavigationBar = ({ user, onLoggedOut, isAuthenticated }) => {
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
-                {isAuthenticated ? (
-                  <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
-                ) : (
-                  <Nav.Link href="/login">Login</Nav.Link>
-                )}
               </>
             )}
           </Nav>

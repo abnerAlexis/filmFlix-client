@@ -8,6 +8,7 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+import { formatDateStringToApiFormat } from "../../commons/utils";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -16,12 +17,6 @@ export const SignupView = () => {
   const [birthday, setBirthday] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    const formatDateStringToApiFormat = (originalDateString) => {
-      const originalDate = new Date(originalDateString);
-      const formattedDateString = originalDate.toISOString().split("T")[0];
-      return formattedDateString;
-    };
 
     const data = {
       Username: username,
