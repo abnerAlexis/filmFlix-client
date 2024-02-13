@@ -15,7 +15,7 @@ export const MovieView = ({ user, movies, onToggleFavorite }) => {
   return (
     <div>
       <div>
-        <img src={movie.Image} className="w-100" />
+        <img src={movie.Image} className="w-10" />
       </div>
       <div>
         <span>Title: </span>

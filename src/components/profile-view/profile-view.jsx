@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./profile-view.scss";
 import {
   Form,
   Button,
@@ -95,15 +96,16 @@ export const ProfileView = ({ user, token, onUserUpdate, onDeleteAccount }) => {
                   </Form.Group>
                   <Button
                     variant="primary"
+                    className="profile-btns"
                     type="submit"
                     onClick={handleSubmit}
                   >
                     Update
                   </Button>
                   <Link to="/profile/favorites">
-                    <Button variant="primary">Your Favorite Movies</Button>
+                    <Button variant="primary" className="profile-btns">Your Favorite Movies</Button>
                   </Link>
-                  <Button variant="danger" onClick={handleDelete}>
+                  <Button variant="danger" className="profile-btns" onClick={handleDelete}>
                     Delete Account
                   </Button>
                 </Form>
