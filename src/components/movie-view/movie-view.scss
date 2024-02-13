@@ -9,7 +9,21 @@
 
 div {
   display: "flex";
-  align-items: "center";
   height: "100%";
   padding: 4px 12px;
+}
+
+.div-container {
+  background-color: rgb(40, 1, 1);
+  border: 8px solid rgb(241, 134, 80);
+  color: rgb(239, 239, 230);
+
+  .img-box {
+    padding-left: 29%;
+    margin-top: 10px;
+  }
+}
+
+.sp-1 {
+  color: rgb(237, 149, 82);
 }

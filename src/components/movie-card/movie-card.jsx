@@ -1,4 +1,5 @@
 import React from "react";
+import "./movie-card.scss";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -11,6 +12,7 @@ export const MovieCard = ({ user, movie, onToggleFavorite }) => {
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Genre}</Card.Text>
         <Button
+          className="tgl-btn"
           variant={
             user && user.FavoriteMovies.includes(movie.Id)
               ? "danger"
@@ -23,7 +25,7 @@ export const MovieCard = ({ user, movie, onToggleFavorite }) => {
             : "Add to Favorites"}
         </Button>
         <Link to={`/movies/${encodeURIComponent(movie.Id)}`}>
-          <Button variant="outline-info">Open</Button>
+          <Button className="opn-btn" variant="outline-info">Open</Button>
         </Link>
       </Card.Body>
     </Card>

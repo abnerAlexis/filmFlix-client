@@ -13,36 +13,36 @@ export const MovieView = ({ user, movies, onToggleFavorite }) => {
   //console.log(JSON.stringify(movies)); //Gets all movies
 
   return (
-    <div>
-      <div>
-        <img src={movie.Image} className="w-10" />
+    <div className="div-container">
+      <div className="img-box">
+        <img src={movie.Image} className="w-30" />
       </div>
       <div>
-        <span>Title: </span>
+        <span className="sp-1">Title: </span>
         <span>{movie.Title}: </span>
       </div>
       <div>
-        <span>Year: </span>
+        <span className="sp-1">Year: </span>
         <span>{movie.Year}: </span>
       </div>
       <div>
-        <span>Genre:</span>
+        <span className="sp-1">Genre:</span>
         <span>{movie.Genre}</span>
       </div>
       <div>
-        <span>Actors: </span>
+        <span className="sp-1">Actors: </span>
         <span>{movie.Actors}: </span>
       </div>
       <div>
-        <span>Description: </span>
+        <span className="sp-1">Description: </span>
         <span>{movie.Description}: </span>
       </div>
       <div>
-        <span>Director: </span>
+        <span className="sp-1">Director: </span>
         <span>{movie.Director}: </span>
       </div>
       <div>
-        <span>Featured: </span>
+        <span className="sp-1">Featured: </span>
         <span>{movie.Featured}: </span>
       </div>
       <Button
