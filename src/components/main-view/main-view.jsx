@@ -3,8 +3,17 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
+import { ProfileFavoriteMoviesView } from "../profile-favorite-movies-view/profile-favorite-movies-view";
+import { Row, Col } from "react-bootstrap";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  mapMovie,
+  updateFavoriteMovies,
+  deleteAccount,
+  updateUser,
+} from "../../commons/utils";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
@@ -13,7 +22,50 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const handleUpdateUser = () => {
+    onUserLogout();
+  };
+
+  const toggleFavorite = async (movieId) => {
+    console.log(`\n\tmovieId: ${movieId}\nuser: ${JSON.stringify(user)}`);
+    if (!user) {
+      return;
+    }
+
+    // Checking if the movie is already in favorites
+    const isFavorite = user.FavoriteMovies.includes(movieId);
+
+    //Updating user's favorites list.
+    const updatedUser = {
+      ...user,
+      FavoriteMovies: isFavorite
+        ? user.FavoriteMovies.filter((id) => id !== movieId) //remove
+        : [...user.FavoriteMovies, movieId], // Add
+    };
+
+    setUser(updatedUser);
+
+    // Update the DB by API call
+    await updateFavoriteMovies(
+      user.Username,
+      token,
+      movieId,
+      isFavorite ? "DELETE" : "POST"
+    );
+  };
+
+  const handleDeleteAccount = () => {
+    // deleteAccount(user.Username, token);
+    onUserLogout();
+  };
+
+  const onUserLogout = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+    window.open("/", "_self");
+  };
 
   useEffect(() => {
     if (!token) {
@@ -25,64 +77,120 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((movies) => {
-        setMovies(movies);
         const moviesFromApi = movies.map((movie) => {
-          // console.log('\nmovie: ' + JSON.stringify(movie))
-          return {
-            Id: movie._id,
-            Title: movie.Title,
-            Year: movie.Year,
-            Image: movie.ImageURL,
-            Genre: movie.Genre,
-            Featured: movie.Featured.toString(),
-            Description: movie.Description,
-            Director: movie.Director.Name,
-            Actors: movie.Actors.join(", "),
-          };
+          return mapMovie(movie);
         });
-
         setMovies(moviesFromApi);
-        // console.log("Movies: "+JSON.stringify(movies));
       });
   }, [token]);
 
   return (
-    <Row className="justify-content-md-center">
-      {!user ? (
-        <Col md={5}>
-          <LoginView
-            onLoggedIn={(user, token) => {
-              setUser(user);
-              setToken(token);
-            }}
+    <BrowserRouter>
+      <NavigationBar user={user} onLoggedOut={onUserLogout} />
+      <Row className="justify-content-md-center">
+        <Routes>
+          <Route
+            path="/signup"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <SignupView />
+                  </Col>
+                )}
+              </>
+            }
           />
-          or
-          <SignupView />
-        </Col>
-      ) : selectedMovie ? (
-        <Col md={8}>
-          <MovieView
-            movie={selectedMovie}
-            onBackClick={() => setSelectedMovie(null)}
+          <Route
+            path="/login"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
+                  </Col>
+                )}
+              </>
+            }
           />
-        </Col>
-      ) : movies.length === 0 ? (
-        <div>There are no movies to show.</div>
-      ) : (
-        <>
-          {movies.map((movie) => (
-            <Col className="mb-5" key={movie.Id} md={3}>
-              <MovieCard
-                key={movie.Id}
-                movie={movie}
-                onMovieClick={(newSelectedMovie) => {
-                  setSelectedMovie(newSelectedMovie);
-                }}
+          <Route
+            path="/movies/:movieId"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>There are no movies to show.</Col>
+                ) : (
+                  <Col md={8}>
+                    <MovieView
+                      movies={movies}
+                      user={user}
+                      onToggleFavorite={toggleFavorite}
+                    />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>There are no movies to show at this time.</Col>
+                ) : (
+                  <>
+                    {movies.map((movie) => (
+                      <Col className="mb-4" key={movie.Id} md={3}>
+                        <MovieCard
+                          movie={movie}
+                          user={user}
+                          onToggleFavorite={toggleFavorite}
+                        />
+                      </Col>
+                    ))}
+                  </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProfileView
+                user={user}
+                token={token}
+                onUserUpdate={handleUpdateUser}
+                onDeleteAccount={handleDeleteAccount}
               />
-            </Col>
-          ))}
-        </>
-      )}
-    </Row>
+            }
+          />
+          <Route
+            path="/profile/favorites"
+            element={
+              <ProfileFavoriteMoviesView
+                user={user}
+                movies={movies.filter((m) =>
+                  user.FavoriteMovies.includes(m.Id)
+                )}
+                onToggleFavorite={toggleFavorite}
+              />
+            }
+          />
+        </Routes>
+      </Row>
+    </BrowserRouter>
   );
 };
