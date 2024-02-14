@@ -21,6 +21,7 @@ export const ProfileView = ({ user, token, onUserUpdate, onDeleteAccount }) => {
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState(user.Email);
   const [newBirthday, setNewBirthday] = useState(user.Birthday);
+  const [refreshPage, setRefreshPage] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,8 +32,13 @@ export const ProfileView = ({ user, token, onUserUpdate, onDeleteAccount }) => {
       Email: newEmail,
       Birthday: formatDateStringToApiFormat(newBirthday),
     };
+    user.Username = newUser.Username
+    user.Password = newUser.Password
+    user.Email = newUser.Email
+    user.Birthday = newUser.Birthday
     await updateUser(user.Username, newUser, token);
-    onUserUpdate(newUser);
+    onUserUpdate(user);
+    setRefreshPage(!refreshPage)
   };
 
   const handleDelete = async (event) => {

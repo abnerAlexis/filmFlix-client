@@ -44,7 +44,6 @@ MovieCard.propTypes = {
     Description: PropTypes.string,
     Director: PropTypes.string,
     Actors: PropTypes.string,
-    // Actors: PropTypes.arrayOf(PropTypes.string),
     FavoriteMovies: PropTypes.array,
   }).isRequired,
 };

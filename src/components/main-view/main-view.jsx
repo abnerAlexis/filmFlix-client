@@ -8,12 +8,7 @@ import { ProfileView } from "../profile-view/profile-view";
 import { ProfileFavoriteMoviesView } from "../profile-favorite-movies-view/profile-favorite-movies-view";
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import {
-  mapMovie,
-  updateFavoriteMovies,
-  deleteAccount,
-  updateUser,
-} from "../../commons/utils";
+import { mapMovie, updateFavoriteMovies } from "../../commons/utils";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
@@ -22,13 +17,9 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-
-  const handleUpdateUser = () => {
-    onUserLogout();
-  };
+  const [actors, setActors] = useState([]);
 
   const toggleFavorite = async (movieId) => {
-    console.log(`\n\tmovieId: ${movieId}\nuser: ${JSON.stringify(user)}`);
     if (!user) {
       return;
     }
@@ -68,21 +59,44 @@ export const MainView = () => {
   };
 
   useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
+
+  useEffect(() => {
     if (!token) {
       return;
     }
+    
+    fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/actors", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((res) => {
+      if (res.ok) {
+        console.log("Actors received.");
+        console.log(`Actors: ${JSON.stringify(res)}`)
+        return res.json()
+      } else {
+        console.log("Actors not received.");
+      }
+    })
+    .then((allActors) => {
+      setActors(allActors)
+    });
+  }, [token])
 
+  useEffect(() => {
+    //Movies from the API
     fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/movies/", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((movies) => {
         const moviesFromApi = movies.map((movie) => {
-          return mapMovie(movie);
+          return mapMovie(movie, actors);
         });
         setMovies(moviesFromApi);
       });
-  }, [token]);
+  }, [actors]);
 
   return (
     <BrowserRouter>
@@ -172,7 +186,9 @@ export const MainView = () => {
               <ProfileView
                 user={user}
                 token={token}
-                onUserUpdate={handleUpdateUser}
+                onUserUpdate={(newUser) => {
+                  setUser(newUser)
+                }}
                 onDeleteAccount={handleDeleteAccount}
               />
             }

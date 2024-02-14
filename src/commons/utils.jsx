@@ -1,4 +1,4 @@
-export const mapMovie = (movie) => {
+export const mapMovie = (movie, actors) => {
   return {
     Id: movie._id,
     Title: movie.Title,
@@ -8,7 +8,7 @@ export const mapMovie = (movie) => {
     Featured: movie.Featured.toString(),
     Description: movie.Description,
     Director: movie.Director.Name,
-    Actors: movie.Actors.join(", "),
+    Actors: actors.filter((a) => movie.Actors.includes(a._id)).map((a) => a.Name).join(', ')
   };
 };
 
@@ -18,8 +18,6 @@ export const updateFavoriteMovies = async (
   movieId,
   methodType
 ) => {
-  console.log(`movieId: ${movieId}`);
-
   try {
     const fetchUrl = `https://film-flix-3b34b5f2dccd.herokuapp.com/users/${username}/movies/${movieId}`;
     console.log(`fetchUrl: ${fetchUrl}`);
@@ -40,32 +38,6 @@ export const updateFavoriteMovies = async (
     }
   } catch (error) {
     console.error("Error updating favorites:", error.message);
-  }
-};
-
-export const deleteAccount = async (username, token) => {
-  try {
-    const deleteResponse = await fetch(
-      `https://film-flix-3b34b5f2dccd.herokuapp.com/users/${username}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    ).then((res) => {
-      if (res.ok) {
-        alert("Your account has been successfully deleted.");
-        console.log("Your account has been successfully deleted.");
-      } else {
-        alert("Your account has NOT been deleted.");
-        console.log("Your account has NOT been deleted.");
-      }
-    });
-  } catch (error) {
-    alert("ERROR: Your account has NOT been deleted.");
-    console.log("Update failed Error:", error.toString());
   }
 };
 
@@ -98,6 +70,32 @@ export const updateUser = async (username, newUser, token) => {
     });
   } catch (error) {
     alert("ERROR: Your account has NOT been updated.");
+    console.log("Update failed Error:", error.toString());
+  }
+};
+
+export const deleteAccount = async (username, token) => {
+  try {
+    const deleteResponse = await fetch(
+      `https://film-flix-3b34b5f2dccd.herokuapp.com/users/${username}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((res) => {
+      if (res.ok) {
+        alert("Your account has been successfully deleted.");
+        console.log("Your account has been successfully deleted.");
+      } else {
+        alert("Your account has NOT been deleted.");
+        console.log("Your account has NOT been deleted.");
+      }
+    });
+  } catch (error) {
+    alert("ERROR: Your account has NOT been deleted.");
     console.log("Update failed Error:", error.toString());
   }
 };
