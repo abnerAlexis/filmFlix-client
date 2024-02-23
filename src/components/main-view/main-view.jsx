@@ -143,7 +143,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>There are no movies to show.</Col>
+                  <Col style={{color: "whitesmoke"}}>There are no movies to show.</Col>
                 ) : (
                   <Col md={8}>
                     <MovieView
@@ -163,7 +163,7 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col>There are no movies to show at this time.</Col>
+                  <Col style={{color: "whitesmoke"}}>There are no movies to show at this time.</Col>
                 ) : (
                   <>
                     {movies.map((movie) => (
