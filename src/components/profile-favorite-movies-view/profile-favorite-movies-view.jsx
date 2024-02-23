@@ -32,7 +32,7 @@ export const ProfileFavoriteMoviesView = ({
               ))}
             </CardGroup>
           ) : (
-            <p>You have not added any favorite movies yet.</p>
+            <p style={{color: "whitesmoke"}}>You have not added any favorite movies yet.</p>
           )}
         </Col>
       </Row>
