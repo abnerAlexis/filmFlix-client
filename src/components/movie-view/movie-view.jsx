@@ -49,7 +49,7 @@ export const MovieView = ({ user, movies, onToggleFavorite }) => {
           : "Add to Favorites"}
       </Button>
       <Link to={`/`}>
-        <button className="back-button">Back</button>
+        <button className="back-button">Home</button>
       </Link>
     </div>
   );

@@ -48,10 +48,10 @@ export const ProfileView = ({ user, token, onUserUpdate, onDeleteAccount }) => {
   };
 
   return (
-    <Container>
+    <Container className="profile-view-container">
       <div className="text-muted">
-        <h5>{user.Username}</h5>
-        <h6>{user.Email}</h6>
+        <h5 style={{color: "whitesmoke"}}>{user.Username}</h5>
+        <h6 style={{color: "whitesmoke"}}>{user.Email}</h6>
       </div>
       <Row>
         <Col>

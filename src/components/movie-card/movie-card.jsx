@@ -6,11 +6,16 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ user, movie, onToggleFavorite }) => {
   return (
-    <Card className="h-100">
-      <Card.Img variant="top" src={movie.Image} />
+    <Card className="h-100 card-body">
+      <Card.Img variant="top" src={movie.Image} className="movie-image"/>
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Genre}</Card.Text>
+        <Card.Text className="card-text">{movie.Genre}</Card.Text>
+        <Card.Text className="card-text description">{movie.Description.substring(0, 100)}...
+          <Link className= "deatails-link" to={`/movies/${encodeURIComponent(movie.Id)}`}>
+            <Button className="link-btn" variant="flat" style={{ color: '#007bff' }}>See details</Button>
+          </Link>
+        </Card.Text>
         <Button
           className="tgl-btn"
           variant={
@@ -24,9 +29,6 @@ export const MovieCard = ({ user, movie, onToggleFavorite }) => {
             ? "Remove from Favorites"
             : "Add to Favorites"}
         </Button>
-        <Link to={`/movies/${encodeURIComponent(movie.Id)}`}>
-          <Button className="opn-btn" variant="outline-info">Open</Button>
-        </Link>
       </Card.Body>
     </Card>
   );

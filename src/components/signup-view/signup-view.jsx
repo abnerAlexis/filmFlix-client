@@ -90,7 +90,7 @@ export const SignupView = () => {
                       required
                     ></Form.Control>
                   </Form.Group>
-                  <Button variant="primary" type="submit">
+                  <Button variant="primary" type="submit" style={{ margin: '10px 10px' }}>
                     Submit
                   </Button>
                 </Form>
