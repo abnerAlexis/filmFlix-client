@@ -1,5 +1,5 @@
 # FilmFlix-Client
-![alt text](screenshot.png)
+![alt text](image.png)
 Build the client-side of "filmFlix" app using React, utilizing its existing server-side code including the REST API and database.
 ## Components & Features
 ### LoginView
