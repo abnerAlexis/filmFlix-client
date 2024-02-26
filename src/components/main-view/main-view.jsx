@@ -18,6 +18,19 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [actors, setActors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = () => {
+    const results = movies.filter((movie) =>
+      movie.Title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+
+    useEffect(() => {
+      handleSearch();
+    }, [searchTerm]);
+  };
 
   const toggleFavorite = async (movieId) => {
     if (!user) {
@@ -59,30 +72,30 @@ export const MainView = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   useEffect(() => {
     if (!token) {
       return;
     }
-    
+
     fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/actors", {
       headers: { Authorization: `Bearer ${token}` },
     })
-    .then((res) => {
-      if (res.ok) {
-        console.log("Actors received.");
-        console.log(`Actors: ${JSON.stringify(res)}`)
-        return res.json()
-      } else {
-        console.log("Actors not received.");
-      }
-    })
-    .then((allActors) => {
-      setActors(allActors)
-    });
-  }, [token])
+      .then((res) => {
+        if (res.ok) {
+          console.log("Actors received.");
+          console.log(`Actors: ${JSON.stringify(res)}`);
+          return res.json();
+        } else {
+          console.log("Actors not received.");
+        }
+      })
+      .then((allActors) => {
+        setActors(allActors);
+      });
+  }, [token]);
 
   useEffect(() => {
     //Movies from the API
@@ -103,6 +116,18 @@ export const MainView = () => {
       <NavigationBar user={user} onLoggedOut={onUserLogout} />
       <Row className="justify-content-md-center">
         <Routes>
+          <Route
+            path="/searchresults"
+            element={
+              <Col md={8}>
+                <MovieCard
+                  movies={searchResults}
+                  user={user}
+                  onToggleFavorite={toggleFavorite}
+                />
+              </Col>
+            }
+          />
           <Route
             path="/signup"
             element={
@@ -143,7 +168,9 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col style={{color: "whitesmoke"}}>There are no movies to show.</Col>
+                  <Col style={{ color: "whitesmoke" }}>
+                    There are no movies to show.
+                  </Col>
                 ) : (
                   <Col md={8}>
                     <MovieView
@@ -163,7 +190,9 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col style={{color: "whitesmoke"}}>There are no movies to show at this time.</Col>
+                  <Col style={{ color: "whitesmoke" }}>
+                    There are no movies to show at this time.
+                  </Col>
                 ) : (
                   <>
                     {movies.map((movie) => (
@@ -187,7 +216,7 @@ export const MainView = () => {
                 user={user}
                 token={token}
                 onUserUpdate={(newUser) => {
-                  setUser(newUser)
+                  setUser(newUser);
                 }}
                 onDeleteAccount={handleDeleteAccount}
               />

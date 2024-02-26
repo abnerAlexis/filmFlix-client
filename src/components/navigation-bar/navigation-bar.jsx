@@ -1,7 +1,21 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { useState } from "react";
+import { Navbar, Container, Nav, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleSearchInputChange = (e) => {
+    setSearchInput(e.target.value);
+  }
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchInput.trim() !== '') {
+      window.location.href = `/searchresults?search=${encodeURIComponent(searchInput.trim())}`;
+    }
+  }
+
   return (
     <Navbar sticky="top" bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
@@ -33,6 +47,19 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
               </>
             )}
           </Nav>
+          <Form 
+            onSubmit={handleSearchSubmit}
+            className="d-flex"
+          >
+            <FormControl 
+              type="text"
+              placeholder="Search movies by title..."
+              className="mr-2"
+              value={searchInput}
+              onChange={handleSearchInputChange}
+            />
+            <Button variant="outline-success" type="submit">Search</Button>
+          </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>
