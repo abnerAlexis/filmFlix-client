@@ -18,6 +18,13 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [actors, setActors] = useState([]);
+  const [searchResults, setSearchResults] = useState(movies);
+
+  const handleSearch = (query) => {
+    const filteredMovies = movies.filter(movie =>
+      movie.Title.toLowerCase().includes(query.toLowerCase()));
+      setSearchResults(filteredMovies);
+  }
 
   const toggleFavorite = async (movieId) => {
     if (!user) {
@@ -100,7 +107,11 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} onLoggedOut={onUserLogout} />
+      <NavigationBar
+        user={user} 
+        onLoggedOut={onUserLogout}
+        onSearch={handleSearch}
+      />
       <Row className="justify-content-md-center">
         <Routes>
           <Route
@@ -171,7 +182,7 @@ export const MainView = () => {
                         <MovieCard
                           movie={movie}
                           user={user}
-                          onToggleFavorite={toggleFavorite}
+                          onToggleFavorite={toggleFavorite}   
                         />
                       </Col>
                     ))}

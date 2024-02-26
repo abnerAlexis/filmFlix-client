@@ -1,7 +1,15 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { SearchBar } from "./search-bar";
+import { useState } from "react";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
+  const [query, setQuery] = useState("");
+
+  const handleSearch = () => {
+    onSearch(query);
+  }
+
   return (
     <Navbar sticky="top" bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
@@ -33,6 +41,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
               </>
             )}
           </Nav>
+          <SearchBar
+            onSearch={setQuery}
+          />
         </Navbar.Collapse>
       </Container>
     </Navbar>
