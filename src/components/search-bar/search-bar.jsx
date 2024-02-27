@@ -9,7 +9,7 @@ export const SearchBar = ({onSearch}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="d-flex justify-content-end" onSubmit={handleSubmit}>
             <input
                 type="text"
                 placeholder="Search by title..."

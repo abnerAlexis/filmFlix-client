@@ -9,6 +9,7 @@ import { ProfileFavoriteMoviesView } from "../profile-favorite-movies-view/profi
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { mapMovie, updateFavoriteMovies } from "../../commons/utils";
+import { SearchBar }from "../search-bar/search-bar";
 
 //MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
@@ -18,6 +19,15 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [actors, setActors] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
+  const handleSearch = (query) => {
+    const filtered = movies.filter(movie =>
+      movie.Title.toLowerCase().includes(query.toLowerCase()));
+      setFilteredMovies(filtered);
+      // console.log("filtered: " + JSON.stringify(filtered));
+      // console.log("filteredMovies: " + JSON.stringify(filteredMovies));
+  }
 
   const toggleFavorite = async (movieId) => {
     if (!user) {
@@ -95,12 +105,18 @@ export const MainView = () => {
           return mapMovie(movie, actors);
         });
         setMovies(moviesFromApi);
+        setFilteredMovies(moviesFromApi);
       });
   }, [actors]);
 
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={onUserLogout} />
+      <div>
+        <SearchBar 
+          onSearch={handleSearch}
+        />
+      </div>
       <Row className="justify-content-md-center">
         <Routes>          
           <Route
@@ -170,7 +186,7 @@ export const MainView = () => {
                   </Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    {filteredMovies.map((movie) => (
                       <Col className="mb-4" key={movie.Id} md={3}>
                         <MovieCard
                           movie={movie}
