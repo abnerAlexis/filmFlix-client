@@ -1,11 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export const SearchBar = ({onSearch}) => {
+export const SearchBar = ({ onSearch }) => {
     const [query, setQuery] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         onSearch(query);
+    };
+
+    const handleClear = () => {
+        setQuery("");
+        onSearch("");
     };
 
     return (
@@ -16,7 +21,9 @@ export const SearchBar = ({onSearch}) => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
-            <button style={{marginLeft:10}} type="submit">Search</button>
+            <button style={{ marginLeft: 10 }} type="button" onClick={query ? handleClear : handleSubmit}>
+                {query ? "Clear" : "Search"}
+            </button>
         </form>
-    )
-}
+    );
+};
