@@ -36,7 +36,7 @@ export const SearchBar = ({ onSearch }) => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyPress} // Handle Enter key press
             />
-            <button style={{marginRight: 10}} onClick={handleButtonClick}>{buttonText}</button>
+            <button style={{marginLeft: 10}} onClick={handleButtonClick}>{buttonText}</button>
         </div>
     );
 };
