@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navbar, Container, Nav, FormControl } from "react-bootstrap";
+import { Navbar, Container, Nav} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
@@ -46,20 +46,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
-          </Nav>
-          <Form 
-            onSubmit={handleSearchSubmit}
-            className="d-flex"
-          >
-            <FormControl 
-              type="text"
-              placeholder="Search movies by title..."
-              className="mr-2"
-              value={searchInput}
-              onChange={handleSearchInputChange}
-            />
-            <Button variant="outline-success" type="submit">Search</Button>
-          </Form>
+          </Nav>        
         </Navbar.Collapse>
       </Container>
     </Navbar>
