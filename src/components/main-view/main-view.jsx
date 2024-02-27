@@ -18,12 +18,16 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [actors, setActors] = useState([]);
-  const [searchResults, setSearchResults] = useState(movies);
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = (query) => {
-    const filteredMovies = movies.filter(movie =>
-      movie.Title.toLowerCase().includes(query.toLowerCase()));
+    if (!query) {
+      setSearchResults(movies)
+    } else {
+      const filteredMovies = movies.filter(movie =>
+        movie.Title.toLowerCase().includes(query.toLowerCase()));
       setSearchResults(filteredMovies);
+    }
   }
 
   const toggleFavorite = async (movieId) => {
@@ -102,6 +106,7 @@ export const MainView = () => {
           return mapMovie(movie, actors);
         });
         setMovies(moviesFromApi);
+        setSearchResults(moviesFromApi)
       });
   }, [actors]);
 
@@ -173,11 +178,11 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : searchResults.length === 0 ? (
                   <Col style={{color: "whitesmoke"}}>There are no movies to show at this time.</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    {searchResults.map((movie) => (
                       <Col className="mb-4" key={movie.Id} md={3}>
                         <MovieCard
                           movie={movie}

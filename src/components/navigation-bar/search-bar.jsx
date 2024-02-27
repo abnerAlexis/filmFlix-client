@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 
-export const SearchBar = ( {onSearch }) => {
+export const SearchBar = ({ onSearch }) => {
     const [query, setQuery] = useState("");
-    
-    const handleSearch = () => {
-        onSearch(query);
-    }
 
     return (
         <div>
@@ -15,7 +11,7 @@ export const SearchBar = ( {onSearch }) => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
-            <button onClick={handleSearch}>Search</button>
+            <button style={{margin: 10}} onClick={() => { onSearch(query) }}>Search</button>
         </div>
     );
 }
