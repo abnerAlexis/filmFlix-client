@@ -37,6 +37,7 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
           </Nav>
           <SearchBar
             onSearch={onSearch}
+
           />
         </Navbar.Collapse>
       </Container>

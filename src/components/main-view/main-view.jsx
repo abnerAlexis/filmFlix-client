@@ -188,7 +188,7 @@ export const MainView = () => {
                           movie={movie}
                           user={user}
                           onToggleFavorite={toggleFavorite}   
-                        />
+                        />                        
                       </Col>
                     ))}
                   </>
