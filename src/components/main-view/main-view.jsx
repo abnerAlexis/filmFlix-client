@@ -9,8 +9,8 @@ import { ProfileFavoriteMoviesView } from "../profile-favorite-movies-view/profi
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { mapMovie, updateFavoriteMovies } from "../../commons/utils";
+import { SearchBar } from "../search-bar/search-bar";
 
-//MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -18,16 +18,23 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
   const [actors, setActors] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
+  const handleSearch = (query) => {
+    const filtered = movies.filter(movie =>
+      movie.Title.toLowerCase().includes(query.toLowerCase()));
+    setFilteredMovies(filtered);
+    // console.log("filtered: " + JSON.stringify(filtered));
+    // console.log("filteredMovies: " + JSON.stringify(filteredMovies));
+  }
 
   const toggleFavorite = async (movieId) => {
     if (!user) {
       return;
     }
 
-    // Checking if the movie is already in favorites
     const isFavorite = user.FavoriteMovies.includes(movieId);
 
-    //Updating user's favorites list.
     const updatedUser = {
       ...user,
       FavoriteMovies: isFavorite
@@ -37,7 +44,6 @@ export const MainView = () => {
 
     setUser(updatedUser);
 
-    // Update the DB by API call
     await updateFavoriteMovies(
       user.Username,
       token,
@@ -59,30 +65,30 @@ export const MainView = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   useEffect(() => {
     if (!token) {
       return;
     }
-    
+
     fetch("https://film-flix-3b34b5f2dccd.herokuapp.com/actors", {
       headers: { Authorization: `Bearer ${token}` },
     })
-    .then((res) => {
-      if (res.ok) {
-        console.log("Actors received.");
-        console.log(`Actors: ${JSON.stringify(res)}`)
-        return res.json()
-      } else {
-        console.log("Actors not received.");
-      }
-    })
-    .then((allActors) => {
-      setActors(allActors)
-    });
-  }, [token])
+      .then((res) => {
+        if (res.ok) {
+          console.log("Actors received.");
+          console.log(`Actors: ${JSON.stringify(res)}`);
+          return res.json();
+        } else {
+          console.log("Actors not received.");
+        }
+      })
+      .then((allActors) => {
+        setActors(allActors);
+      });
+  }, [token]);
 
   useEffect(() => {
     //Movies from the API
@@ -95,12 +101,17 @@ export const MainView = () => {
           return mapMovie(movie, actors);
         });
         setMovies(moviesFromApi);
+        setFilteredMovies(moviesFromApi);
       });
   }, [actors]);
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} onLoggedOut={onUserLogout} />
+      <NavigationBar
+        user={user}
+        onLoggedOut={onUserLogout}
+        onSearch={handleSearch}
+      />
       <Row className="justify-content-md-center">
         <Routes>
           <Route
@@ -143,7 +154,9 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col style={{color: "whitesmoke"}}>There are no movies to show.</Col>
+                  <Col style={{ color: "whitesmoke" }}>
+                    There are no movies to show.
+                  </Col>
                 ) : (
                   <Col md={8}>
                     <MovieView
@@ -163,10 +176,13 @@ export const MainView = () => {
                 {!user ? (
                   <Navigate to="/login" replace />
                 ) : movies.length === 0 ? (
-                  <Col style={{color: "whitesmoke"}}>There are no movies to show at this time.</Col>
+                  <Col style={{ color: "whitesmoke" }}>
+                    There are no movies to show at this time.
+                  </Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    {/* <SearchBar onSearch={handleSearch} /> */}
+                    {filteredMovies.map((movie) => (
                       <Col className="mb-4" key={movie.Id} md={3}>
                         <MovieCard
                           movie={movie}
@@ -187,7 +203,7 @@ export const MainView = () => {
                 user={user}
                 token={token}
                 onUserUpdate={(newUser) => {
-                  setUser(newUser)
+                  setUser(newUser);
                 }}
                 onDeleteAccount={handleDeleteAccount}
               />
