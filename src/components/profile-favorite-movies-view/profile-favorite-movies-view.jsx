@@ -11,8 +11,8 @@ export const ProfileFavoriteMoviesView = ({
   return (
     <Container>
       <div className="text-muted">
-        <h5 style={{color: "whitesmoke"}}>{user.Username}</h5>
-        <h6 style={{color: "whitesmoke"}}>{user.Email}</h6>
+        <h5 style={{ color: "whitesmoke" }}>{user.Username}</h5>
+        <h6 style={{ color: "whitesmoke" }}>{user.Email}</h6>
       </div>
       <Row>
         <Col>
@@ -32,7 +32,7 @@ export const ProfileFavoriteMoviesView = ({
               ))}
             </CardGroup>
           ) : (
-            <p style={{color: "whitesmoke"}}>You have not added any favorite movies yet.</p>
+            <p style={{ color: "whitesmoke" }}>You have not added any favorite movies yet.</p>
           )}
         </Col>
       </Row>

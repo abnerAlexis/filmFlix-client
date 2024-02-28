@@ -1,8 +1,8 @@
-import { Navbar, Container, Nav} from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { SearchBar } from "../search-bar/search-bar";
 
-export const NavigationBar = ({ user, onLoggedOut,onSearch }) => {
+export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
 
   const location = useLocation();
   const handleRefresh = () => {
@@ -12,7 +12,7 @@ export const NavigationBar = ({ user, onLoggedOut,onSearch }) => {
   return (
     <Navbar sticky="top" bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand onClick={handleRefresh}>
+        <Navbar.Brand onClick={handleRefresh} style={{ cursor: "pointer" }}>
           Film Flix
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,18 +30,18 @@ export const NavigationBar = ({ user, onLoggedOut,onSearch }) => {
             )}
             {user && (
               <>
-                <Nav.Link onClick={handleRefresh}>Home</Nav.Link> 
+                <Nav.Link onClick={handleRefresh}>Home</Nav.Link>
                 <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
-          </Nav>   
+          </Nav>
           {
-            location.pathname === "/" && 
+            location.pathname === "/" &&
             <SearchBar
-            onSearch={onSearch}
+              onSearch={onSearch}
             />
           }
         </Navbar.Collapse>

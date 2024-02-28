@@ -8,11 +8,6 @@ export const SearchBar = ({ onSearch }) => {
         onSearch(query);
     };
 
-    const handleClear = () => {
-        setQuery("");
-        window.location.href = "/"
-    };
-
     return (
         <form className="d-flex justify-content-end" onSubmit={handleSubmit}>
             <input
@@ -21,10 +16,7 @@ export const SearchBar = ({ onSearch }) => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
-            <button style={{ marginLeft:10 }} type="button" onClick={handleSubmit}>Search</button>
-            {/* <button style={{ marginLeft: 10 }} type="button" onClick={query ? handleClear : handleSubmit}>
-                {query ? "Back" : "Search"}
-            </button> */}
+            <button style={{ marginLeft: 10 }} type="button" onClick={handleSubmit}>Search</button>
         </form>
     );
 };

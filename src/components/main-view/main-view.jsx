@@ -9,9 +9,8 @@ import { ProfileFavoriteMoviesView } from "../profile-favorite-movies-view/profi
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { mapMovie, updateFavoriteMovies } from "../../commons/utils";
-import { SearchBar }from "../search-bar/search-bar";
+import { SearchBar } from "../search-bar/search-bar";
 
-//MainView component created. It acts as the homepage of the app.
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -24,9 +23,9 @@ export const MainView = () => {
   const handleSearch = (query) => {
     const filtered = movies.filter(movie =>
       movie.Title.toLowerCase().includes(query.toLowerCase()));
-      setFilteredMovies(filtered);
-      // console.log("filtered: " + JSON.stringify(filtered));
-      // console.log("filteredMovies: " + JSON.stringify(filteredMovies));
+    setFilteredMovies(filtered);
+    // console.log("filtered: " + JSON.stringify(filtered));
+    // console.log("filteredMovies: " + JSON.stringify(filteredMovies));
   }
 
   const toggleFavorite = async (movieId) => {
@@ -34,10 +33,8 @@ export const MainView = () => {
       return;
     }
 
-    // Checking if the movie is already in favorites
     const isFavorite = user.FavoriteMovies.includes(movieId);
 
-    //Updating user's favorites list.
     const updatedUser = {
       ...user,
       FavoriteMovies: isFavorite
@@ -47,7 +44,6 @@ export const MainView = () => {
 
     setUser(updatedUser);
 
-    // Update the DB by API call
     await updateFavoriteMovies(
       user.Username,
       token,
@@ -111,13 +107,13 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar 
-        user={user} 
-        onLoggedOut={onUserLogout} 
+      <NavigationBar
+        user={user}
+        onLoggedOut={onUserLogout}
         onSearch={handleSearch}
       />
       <Row className="justify-content-md-center">
-        <Routes>          
+        <Routes>
           <Route
             path="/signup"
             element={
