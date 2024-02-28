@@ -11,7 +11,7 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
 
   return (
     <Navbar sticky="top" bg="dark" expand="lg" data-bs-theme="dark">
-      <Container>
+      <Container fluid>
         <Navbar.Brand onClick={handleRefresh} style={{ cursor: "pointer" }}>
           Film Flix
         </Navbar.Brand>

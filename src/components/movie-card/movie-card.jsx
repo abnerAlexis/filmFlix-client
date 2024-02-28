@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 export const MovieCard = ({ user, movie, onToggleFavorite }) => {
   return (
     <Card className="h-100 card-body">
-      <Card.Img variant="top" src={movie.Image} className="movie-image" />
+      <Card.Img variant="top" src={movie.Image} className="img-fluid movie-image" />
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text className="card-text">{movie.Genre}</Card.Text>
-        <Card.Text className="card-text description">{movie.Description.substring(0, 100)}...
+        <Card.Text className="card-text"><strong>{movie.Genre}</strong></Card.Text>
+        <Card.Text className="card-text description">{movie.Description.substring(0, 60)}...
           <Link className="deatails-link" to={`/movies/${encodeURIComponent(movie.Id)}`}>
             <Button className="link-btn" variant="flat" style={{ color: '#007bff' }}>See details</Button>
           </Link>

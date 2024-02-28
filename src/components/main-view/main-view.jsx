@@ -9,7 +9,6 @@ import { ProfileFavoriteMoviesView } from "../profile-favorite-movies-view/profi
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { mapMovie, updateFavoriteMovies } from "../../commons/utils";
-import { SearchBar } from "../search-bar/search-bar";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -153,7 +152,7 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : filteredMovies.length === 0 ? (
                   <Col style={{ color: "whitesmoke" }}>
                     There are no movies to show.
                   </Col>
@@ -175,7 +174,7 @@ export const MainView = () => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
+                ) : filteredMovies.length === 0 ? (
                   <Col style={{ color: "whitesmoke" }}>
                     There are no movies to show at this time.
                   </Col>
@@ -183,7 +182,8 @@ export const MainView = () => {
                   <>
                     {/* <SearchBar onSearch={handleSearch} /> */}
                     {filteredMovies.map((movie) => (
-                      <Col className="mb-4" key={movie.Id} md={3}>
+                      // <Col className="mb-4" key={movie.Id} md={3}>
+                      <Col className="mb-4" key={movie.Id}  xs={12} md={6} lg={3}>
                         <MovieCard
                           movie={movie}
                           user={user}

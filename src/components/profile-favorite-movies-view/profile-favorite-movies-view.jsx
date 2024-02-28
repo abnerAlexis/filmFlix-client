@@ -20,7 +20,8 @@ export const ProfileFavoriteMoviesView = ({
           {movies.length > 0 ? (
             <CardGroup>
               {movies.map((movie) => (
-                <Col className="mb-3 faves-col" key={movie.Id} md={3}>
+                // <Col className="mb-3 faves-col" key={movie.Id} md={3}>
+                <Col className="mb-4 faves-col" key={movie.Id} xs={12} md={6} lg={3}>
                   <Card.Body key={movie.Id}>
                     <MovieCard
                       movie={movie}
