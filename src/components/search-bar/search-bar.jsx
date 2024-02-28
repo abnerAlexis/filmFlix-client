@@ -10,7 +10,7 @@ export const SearchBar = ({ onSearch }) => {
 
     const handleClear = () => {
         setQuery("");
-        onSearch("");
+        window.location.href = "/"
     };
 
     return (
@@ -21,9 +21,10 @@ export const SearchBar = ({ onSearch }) => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
-            <button style={{ marginLeft: 10 }} type="button" onClick={query ? handleClear : handleSubmit}>
-                {query ? "Clear" : "Search"}
-            </button>
+            <button style={{ marginLeft:10 }} type="button" onClick={handleSubmit}>Search</button>
+            {/* <button style={{ marginLeft: 10 }} type="button" onClick={query ? handleClear : handleSubmit}>
+                {query ? "Back" : "Search"}
+            </button> */}
         </form>
     );
 };

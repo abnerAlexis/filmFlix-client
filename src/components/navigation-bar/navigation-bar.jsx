@@ -1,25 +1,18 @@
-import { useState } from "react";
 import { Navbar, Container, Nav} from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { SearchBar } from "../search-bar/search-bar";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
-  const [searchInput, setSearchInput] = useState("");
+export const NavigationBar = ({ user, onLoggedOut,onSearch }) => {
 
-  const handleSearchInputChange = (e) => {
-    setSearchInput(e.target.value);
-  }
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (searchInput.trim() !== '') {
-      window.location.href = `/searchresults?search=${encodeURIComponent(searchInput.trim())}`;
-    }
-  }
+  const location = useLocation();
+  const handleRefresh = () => {
+    window.location.href = "/";
+  };
 
   return (
     <Navbar sticky="top" bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand onClick={handleRefresh}>
           Film Flix
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,16 +30,20 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
             )}
             {user && (
               <>
-                <Nav.Link as={Link} to="/">
-                  Home
-                </Nav.Link>
+                <Nav.Link onClick={handleRefresh}>Home</Nav.Link> 
                 <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
-          </Nav>        
+          </Nav>   
+          {
+            location.pathname === "/" && 
+            <SearchBar
+            onSearch={onSearch}
+            />
+          }
         </Navbar.Collapse>
       </Container>
     </Navbar>

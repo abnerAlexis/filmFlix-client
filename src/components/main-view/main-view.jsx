@@ -111,7 +111,11 @@ export const MainView = () => {
 
   return (
     <BrowserRouter>
-      <NavigationBar user={user} onLoggedOut={onUserLogout} />
+      <NavigationBar 
+        user={user} 
+        onLoggedOut={onUserLogout} 
+        onSearch={handleSearch}
+      />
       <Row className="justify-content-md-center">
         <Routes>          
           <Route
@@ -181,7 +185,7 @@ export const MainView = () => {
                   </Col>
                 ) : (
                   <>
-                    <SearchBar onSearch={handleSearch} />
+                    {/* <SearchBar onSearch={handleSearch} /> */}
                     {filteredMovies.map((movie) => (
                       <Col className="mb-4" key={movie.Id} md={3}>
                         <MovieCard
