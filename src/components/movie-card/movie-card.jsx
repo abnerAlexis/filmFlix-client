@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ user, movie, onToggleFavorite }) => {
   return (
-    <Card className="h-100 card-body">
+    <Card className="h-100 card-body"> 
       <Card.Img variant="top" src={movie.Image} className="img-fluid movie-image" />
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
