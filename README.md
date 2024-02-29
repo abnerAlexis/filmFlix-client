@@ -1,5 +1,6 @@
-# FilmFlix-Client
-![alt text](image.png)
+# [FilmFlix-Client](https://film-flix-aa36.netlify.app/)
+
+[![alt text](image.png)]( https://film-flix-aa36.netlify.app/)
 Build the client-side of "filmFlix" app using React, utilizing its existing server-side code including the REST API and database.
 ## Components & Features
 ### LoginView
