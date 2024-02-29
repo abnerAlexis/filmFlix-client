@@ -5,7 +5,15 @@
 }
 
 .profile-view-container {
-  width: 100%;
-  background-color: black;
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
   color: whitesmoke;
+}
+
+@media (max-width: 768px) {
+  .profile-view-container,
+  .profile-btns {
+    width: 90%; /* Adjust the width for smaller screens */
+  }
 }
