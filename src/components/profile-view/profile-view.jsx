@@ -48,7 +48,8 @@ export const ProfileView = ({ user, token, onUserUpdate, onDeleteAccount }) => {
   };
 
   return (
-    <Container className="profile-view-container">
+    // <Container className="profile-view-container">
+    <Container style={{ width: '50%', margin: '0 auto' }} className="profile-view-container">
       <div className="text-muted">
         <h5 style={{ color: "whitesmoke" }}>{user.Username}</h5>
         <h6 style={{ color: "whitesmoke" }}>{user.Email}</h6>
