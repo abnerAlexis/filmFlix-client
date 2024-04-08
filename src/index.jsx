@@ -23,4 +23,4 @@ const root = createRoot(container);
 
 // Tells React to render your app in the root DOM element
 root.render(<App />);
-atatus.notify(new Error('Test Atatus Setup'));
+// atatus.notify(new Error('Test Atatus Setup'));
