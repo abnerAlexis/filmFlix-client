@@ -1,4 +1,5 @@
 export const mapMovie = (movie, actors) => {
+  console.log(`movie: ${JSON.stringify(movie)}`)
   return {
     Id: movie._id,
     Title: movie.Title,

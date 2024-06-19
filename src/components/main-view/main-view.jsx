@@ -23,8 +23,8 @@ export const MainView = () => {
     const filtered = movies.filter(movie =>
       movie.Title.toLowerCase().includes(query.toLowerCase()));
     setFilteredMovies(filtered);
-    // console.log("filtered: " + JSON.stringify(filtered));
-    // console.log("filteredMovies: " + JSON.stringify(filteredMovies));
+    console.log("filtered: " + JSON.stringify(filtered));
+    console.log("filteredMovies: " + JSON.stringify(filteredMovies));
   }
 
   const toggleFavorite = async (movieId) => {
